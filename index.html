@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peace on the Pond | Host Your Retreat</title>
+<meta name="description" content="Peace on the Pond is a private 10-acre retreat venue in Douglasville, Georgia, about 35 minutes from Atlanta. Host your retreat with a private pond, labyrinth, trails, and spa.">
+<meta property="og:title" content="Peace on the Pond: Host Your Retreat">
+<meta property="og:description" content="A private 10-acre retreat venue in Douglasville, Georgia, for retreat hosts, wellness leaders, and facilitators.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#fcfaf0">
+<link rel="icon" type="image/png" href="media/favicon.png">
+<link rel="apple-touch-icon" href="media/logo-emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nanum+Myeongjo:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#18181a;
+    --canvas:#fcfaf0;
+    --canvas-raise:#e5d8c6;
+    --forest:#1b5642;
+    --forest-deep:#123a2c;
+    --sage:#e5d8c6;
+    --sage-soft:#efe6d8;
+    --brass:#cca456;
+    --brass-soft:#dcc179;
+    --water:#cca456;
+    --line: rgba(20,19,16,0.14);
+    --card: #ffffff;
+    --cream:#fcfaf0;
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html{scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior:smooth;}
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:'Nanum Myeongjo', Georgia, 'Times New Roman', serif;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Libre Baskerville', Baskerville, Georgia, serif;
+    font-weight:400;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  a{ color:inherit; }
+  p{ line-height:1.6; }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:color-mix(in srgb, var(--canvas) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top, 0px);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:80px;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand img{ height:52px; width:auto; display:block; }
+  .brand span{
+    font-family:'Libre Baskerville', Baskerville, Georgia, serif;
+    font-weight:400; font-style:italic;
+    font-size:19px; color:var(--ink);
+    letter-spacing:0.01em;
+  }
+  @media (max-width:520px){ .brand span{ display:none; } }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family:'Work Sans', sans-serif; font-weight:600; font-size:15px;
+    padding:13px 26px; border-radius:2px;
+    text-decoration:none; cursor:pointer;
+    border:1px solid transparent;
+    min-height:44px;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background:var(--forest); color:var(--cream); border-color:var(--forest); }
+  .btn-primary:hover{ background:var(--forest-deep); }
+  .btn-line{ background:transparent; color:#ffffff; border-color:#ffffff; }
+  .btn-line:hover{ background:#ffffff; color:var(--forest); }
+  .btn-nav{ padding:11px 20px; font-size:14px; }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; padding:0; overflow:hidden; min-height:560px; display:flex; align-items:flex-end; }
+  .hero-media{ position:absolute; inset:0; z-index:0; }
+  .hero-media video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-media::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(10,10,8,0.86) 0%, rgba(10,10,8,0.58) 45%, rgba(10,10,8,0.28) 100%);
+  }
+  .hero-ripple{ position:absolute; z-index:1; top:-120px; right:-140px; width:560px; height:560px; opacity:0.35; pointer-events:none; }
+  @media (max-width:720px){ .hero-ripple{ width:400px; height:400px; top:-80px; right:-160px; opacity:0.25; } }
+  .hero-inner{ position:relative; z-index:2; max-width:660px; padding:120px 24px 64px; }
+  .tag{
+    display:inline-block; font-size:13px; font-weight:600; letter-spacing:0.04em;
+    color:var(--ink); background:var(--canvas); border:1px solid var(--line); padding:7px 14px; border-radius:2px; margin-bottom:26px;
+  }
+  .hero h1{ font-size:clamp(30px, 4.7vw, 48px); line-height:1.18; margin-bottom:22px; color:var(--canvas); }
+  .hero p.lede{ font-size:19px; line-height:1.6; color:var(--canvas); opacity:0.92; margin-bottom:34px; max-width:520px; }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+  .hero-note{ font-size:14px; opacity:0.85; margin-top:16px; color:var(--canvas); }
+
+  .fade-in{ animation:riseIn .9s cubic-bezier(.2,.7,.3,1) both; }
+  .fade-in.d1{ animation-delay:.08s; } .fade-in.d2{ animation-delay:.18s; } .fade-in.d3{ animation-delay:.28s; }
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ .fade-in{ animation:none; } }
+
+  /* ---------- fact strip ---------- */
+  .facts{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--canvas-raise); }
+  .facts .wrap{ display:grid; grid-template-columns:repeat(4, 1fr); gap:0; }
+  .fact{ padding:30px 18px; text-align:center; border-left:1px solid var(--line); }
+  .fact:first-child{ border-left:none; }
+  .fact .num{ font-family:'Libre Baskerville', Georgia, serif; font-size:28px; color:var(--forest); font-weight:400; }
+  .fact .lbl{ font-size:13px; opacity:0.72; margin-top:4px; }
+  @media (max-width:720px){
+    .facts .wrap{ grid-template-columns:repeat(2, 1fr); }
+    .fact{ padding:22px 12px; }
+    .fact:nth-child(3){ border-left:none; }
+  }
+
+  section{ padding:96px 0; }
+  @media (max-width:720px){ section{ padding:60px 0; } }
+  .section-head{ margin-bottom:48px; }
+  .section-head .kicker{ font-size:13px; font-weight:600; letter-spacing:0.04em; color:var(--ink); opacity:0.7; margin-bottom:10px; display:block; }
+  .section-head h2{ font-size:clamp(28px, 3.6vw, 40px); line-height:1.14; max-width:620px; }
+  .section-head p.lead{ margin-top:14px; font-size:17px; opacity:0.8; max-width:560px; }
+  .alt{ background:var(--canvas-raise); }
+
+  /* ---------- story ---------- */
+  .story{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center; }
+  @media (max-width:840px){ .story{ grid-template-columns:1fr; gap:32px; } }
+  .story-mark{
+    font-family:'Libre Baskerville', Georgia, serif; font-style:italic; font-size:15px; color:var(--ink); opacity:0.75;
+    display:block; margin-bottom:14px;
+  }
+  .story p{ font-size:16.5px; opacity:0.86; margin:0 0 16px; }
+  .story .names{ font-family:'Libre Baskerville', Georgia, serif; font-style:italic; color:var(--ink); font-size:17px; margin-top:20px; }
+  .story-figure{
+    position:relative; overflow:hidden; border:1px solid var(--line);
+    min-height:420px; display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  .story-figure img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .story-figure::before{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(0deg, rgba(15,19,14,0.82) 0%, rgba(15,19,14,0.25) 55%, rgba(15,19,14,0.05) 85%); }
+  .story-figure .content{ position:relative; z-index:2; padding:30px; }
+  .story-figure .est{ font-size:13px; letter-spacing:0.04em; color:#fff; opacity:0.85; font-weight:600; display:block; margin-bottom:14px; }
+  .story-figure blockquote{ margin:0; font-family:'Libre Baskerville', Georgia, serif; font-style:italic; font-size:19px; color:#fff; line-height:1.4; }
+  .story-figure cite{ font-style:normal; font-size:14px; color:#fff; opacity:0.75; display:block; margin-top:12px; }
+
+  /* ---------- testimonial ---------- */
+  .testimonial{ max-width:760px; }
+  .testimonial .stars{ color:var(--forest); font-size:18px; letter-spacing:3px; margin-bottom:20px; }
+  .testimonial blockquote{ margin:0; font-family:'Libre Baskerville', Georgia, serif; font-style:italic; font-size:clamp(20px,2.6vw,26px); line-height:1.45; color:var(--ink); }
+  .testimonial cite{ display:block; margin-top:20px; font-style:normal; font-size:15px; opacity:0.7; }
+
+  /* ---------- pain points ---------- */
+  .pain-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .pain-grid .p-item{ background:var(--canvas); padding:32px; }
+  .pain-grid .p-item p{ font-size:16px; opacity:0.85; margin:0; }
+  @media (max-width:720px){ .pain-grid{ grid-template-columns:1fr; } .pain-grid .p-item{ padding:26px; } }
+
+  /* ---------- why different / split ---------- */
+  .split{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap:64px; align-items:start; }
+  @media (max-width:840px){ .split{ grid-template-columns:1fr; gap:36px; } }
+  .split p{ font-size:18px; opacity:0.85; }
+  .reasons{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  .reasons li{ display:flex; gap:16px; padding:20px 0; border-top:1px solid var(--line); }
+  .reasons li:last-child{ border-bottom:1px solid var(--line); }
+  .reasons .mark{ flex:none; width:12px; height:12px; margin-top:7px; border:1.5px solid var(--brass); border-radius:50%; }
+  .reasons .txt strong{ display:block; font-weight:600; margin-bottom:3px; }
+  .reasons .txt span{ font-size:15px; opacity:0.78; }
+
+  /* ---------- you / us split ---------- */
+  .division{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); }
+  .division .col{ padding:40px; }
+  .division .col + .col{ border-left:none; background:var(--forest); color:var(--cream); }
+  .division .col h3{ font-size:14px; letter-spacing:0.04em; font-weight:600; opacity:0.7; margin-bottom:22px; color:var(--ink); }
+  .division .col + .col h3{ opacity:0.85; color:var(--cream); }
+  .division ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .division li{ font-size:16px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+  .division .col + .col li{ border-bottom:1px solid rgba(252,250,240,0.2); }
+  .division li:last-child{ border-bottom:none; padding-bottom:0; }
+  @media (max-width:720px){ .division{ grid-template-columns:1fr; } .division .col + .col{ border-left:none; border-top:1px solid var(--line); } .division .col{ padding:28px; } }
+
+  /* ---------- grounds ---------- */
+  .grounds-grid{
+    display:grid; gap:14px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 130px) repeat(2, 150px);
+    grid-template-areas:
+      "lake lake lake lake laby laby"
+      "lake lake lake lake laby laby"
+      "lake lake lake lake spa  spa"
+      "lake lake lake lake spa  spa"
+      "green green trail trail terr terr"
+      "green green trail trail terr terr";
+  }
+  .g-card{
+    position:relative; overflow:hidden; border:1px solid var(--line);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    color:#fff;
+  }
+  .g-card.lake{ grid-area:lake; }
+  .g-card.laby{ grid-area:laby; }
+  .g-card.spa{ grid-area:spa; }
+  .g-card.green{ grid-area:green; }
+  .g-card.trail{ grid-area:trail; }
+  .g-card.terr{ grid-area:terr; }
+  .g-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transition:transform .5s ease; }
+  .g-card:hover img{ transform:scale(1.04); }
+  .g-card::after{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(0deg, rgba(15,19,14,0.78) 0%, rgba(15,19,14,0.15) 55%, rgba(15,19,14,0) 80%); }
+  .g-card.laby::before{
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background-image: repeating-radial-gradient(circle at 50% 42%, transparent 0px, transparent 13px, rgba(252,250,240,0.4) 14px, transparent 15px);
+  }
+  .g-card .g-text{ position:relative; z-index:2; padding:20px; }
+  .g-card h3{ font-size:19px; color:#fff; }
+  .g-card p{ font-size:14px; opacity:0.88; margin:4px 0 0; color:#fff; }
+  @media (max-width:900px){
+    .grounds-grid{
+      grid-template-columns:repeat(2, 1fr);
+      grid-template-rows: repeat(6, 190px);
+      grid-template-areas:
+        "lake lake" "laby spa" "green trail" "green terr";
+    }
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery-scroll{
+    display:flex; gap:14px; overflow-x:auto; padding-bottom:8px;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+  }
+  .gallery-scroll::-webkit-scrollbar{ height:6px; }
+  .gallery-scroll::-webkit-scrollbar-thumb{ background:var(--line); border-radius:3px; }
+  .g-photo{
+    position:relative; flex:none; width:300px; height:220px; overflow:hidden;
+    border:1px solid var(--line); scroll-snap-align:start;
+  }
+  .g-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .g-photo::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,19,14,0.7) 0%, rgba(15,19,14,0) 45%); }
+  .g-photo span{ position:absolute; left:16px; bottom:14px; z-index:2; color:#fff; font-size:14.5px; font-weight:600; }
+  @media (max-width:720px){ .g-photo{ width:250px; height:190px; } }
+
+  /* ---------- process ---------- */
+  .steps{ display:flex; flex-direction:column; }
+  .step{ display:grid; grid-template-columns:64px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--line); }
+  .step:last-child{ border-bottom:1px solid var(--line); }
+  .step .idx{ font-family:'Libre Baskerville', Georgia, serif; font-size:28px; color:var(--brass); font-style:italic; }
+  .step h3{ font-size:21px; margin-bottom:8px; }
+  .step p{ opacity:0.8; font-size:15.5px; max-width:560px; }
+
+  /* ---------- pricing ---------- */
+  .price-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
+  @media (max-width:720px){ .price-grid{ grid-template-columns:1fr; } }
+  .price-card{ background:var(--card); border:1px solid var(--line); padding:36px; }
+  .price-card .label{ font-size:14px; opacity:0.7; margin-bottom:10px; }
+  .price-card .amount{ font-family:'Libre Baskerville', Georgia, serif; font-size:40px; color:var(--forest); font-weight:400; }
+  .price-card .amount sup{ font-size:16px; font-weight:600; opacity:0.7; margin-right:4px; top:-14px; position:relative; }
+  .price-card .per{ font-size:14px; opacity:0.65; margin-top:4px; }
+  .disclaimer{ font-size:14px; opacity:0.68; max-width:640px; border-left:2px solid var(--forest); padding-left:16px; }
+
+  /* ---------- reserve ---------- */
+  .reserve{ display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  @media (max-width:780px){ .reserve{ grid-template-columns:1fr; } }
+  .reserve .r-card{ border:1px solid var(--line); padding:30px; background:var(--card); }
+  .reserve .r-card h3{ font-size:19px; margin-bottom:10px; }
+  .reserve .r-card p{ font-size:15px; opacity:0.8; }
+
+  /* ---------- built for (tags) ---------- */
+  .tags{ display:flex; flex-wrap:wrap; gap:12px; }
+  .tags span{ border:1px solid var(--line); background:var(--card); padding:11px 18px; font-size:14.5px; border-radius:2px; }
+
+  /* ---------- FAQ ---------- */
+  .faq{ display:flex; flex-direction:column; }
+  .faq details{ border-top:1px solid var(--line); padding:22px 0; }
+  .faq details:last-child{ border-bottom:1px solid var(--line); }
+  .faq summary{ cursor:pointer; font-family:'Libre Baskerville', Georgia, serif; font-size:19px; color:var(--ink); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary .icon{ font-size:22px; color:var(--forest); flex:none; transition:transform .2s ease; }
+  .faq details[open] summary .icon{ transform:rotate(45deg); }
+  .faq .a{ margin-top:14px; font-size:15.5px; opacity:0.82; max-width:640px; }
+
+  /* ---------- upcoming ---------- */
+  .events{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  @media (max-width:840px){ .events{ grid-template-columns:1fr; } }
+  .event{ border:1px solid var(--line); background:var(--card); padding:26px; display:flex; flex-direction:column; gap:14px; min-height:170px; }
+  .event .date{ font-size:13px; letter-spacing:0.03em; color:var(--ink); opacity:0.65; font-weight:600; }
+  .event h3{ font-size:19px; line-height:1.3; }
+  .event .desc{ margin:0; font-size:15px; line-height:1.55; opacity:.85; }
+  .event .more{ margin-top:auto; font-size:14px; font-weight:600; color:var(--forest); text-decoration:none; }
+  .event .more:hover{ text-decoration:underline; }
+
+  /* ---------- cta banner ---------- */
+  .cta{ position:relative; background:var(--canvas); color:var(--ink); overflow:hidden; padding:88px 0; border-top:1px solid var(--line); }
+  .cta h2{ color:var(--ink); font-size:clamp(28px, 4vw, 42px); max-width:560px; }
+  .cta .ripple2{ position:absolute; left:-140px; bottom:-200px; width:520px; height:520px; opacity:0.35; pointer-events:none; }
+  .cta-inner{ position:relative; z-index:2; }
+  .cta p{ opacity:0.75; max-width:480px; margin:16px 0 30px; font-size:17px; }
+  .cta .btn-primary{ background:var(--forest); color:var(--canvas); border-color:var(--forest); }
+  .cta .btn-primary:hover{ background:var(--forest-deep); }
+  .cta .phone{ margin-top:18px; font-size:15px; opacity:0.75; }
+  .cta .phone a{ text-decoration:underline; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:64px 0 calc(40px + env(safe-area-inset-bottom, 0px)); border-top:1px solid var(--line); }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+  @media (max-width:720px){ .foot-grid{ grid-template-columns:1fr; gap:28px; } }
+  .foot-grid h4{ font-size:13px; letter-spacing:0.04em; opacity:0.6; margin-bottom:14px; font-weight:600; }
+  .foot-grid ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .foot-grid a{ text-decoration:none; font-size:14.5px; opacity:0.85; }
+  .foot-grid a:hover{ opacity:1; text-decoration:underline; }
+  .foot-brand{ display:flex; align-items:center; gap:12px; }
+  .foot-brand img{ height:46px; width:auto; }
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-top:1px solid var(--line); padding-top:24px; font-size:13px; opacity:0.6; }
+  .social{ display:flex; gap:14px; }
+  .social a{ opacity:0.75; }
+  .social a:hover{ opacity:1; }
+
+  /* Labels, buttons, and small details stay sans, matching the proposals */
+  .tag, .section-head .kicker, .fact .lbl, .story-figure .est, .division .col h3,
+  .g-photo span, .event .date, .event .more, .foot-grid h4, .hero-note, .btn, button,
+  .price-card .amount sup, .stars, cite { font-family:'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+  /* Call + pre-booking quick actions */
+  .nav-actions{ display:flex; gap:10px; align-items:center; }
+  .btn-quiet{ background:transparent; color:var(--forest); border-color:var(--forest); }
+  .btn-quiet:hover{ background:var(--forest); color:var(--cream); }
+  .action-bar{ display:none; }
+  @media (max-width:720px){
+    .nav-actions .btn-quiet{ display:none; }
+    .action-bar{
+      display:grid; grid-template-columns:1fr 1.4fr; gap:10px;
+      position:fixed; left:0; right:0; bottom:0; z-index:50;
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+      background:var(--canvas); border-top:1px solid var(--line); box-shadow:0 -6px 20px rgba(0,0,0,.08);
+    }
+    .action-bar .btn{ justify-content:center; text-align:center; padding:14px 10px; }
+    body{ padding-bottom:78px; }
+  }
+  .cta-buttons{ display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-bottom:18px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="https://www.peaceonthepond.com">
+      <img src="media/logo-emblem.png" alt="Peace on the Pond">
+      <span>Peace on the Pond</span>
+    </a>
+    <div class="nav-actions">
+      <a class="btn btn-quiet btn-nav" data-phone href="tel:+14244821765" aria-label="Call Peace on the Pond">Call</a>
+      <a class="btn btn-primary btn-nav" data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Inquire</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-media">
+    <video autoplay muted loop playsinline preload="auto" poster="media/pond-poster.jpg">
+      <source src="media/pond.mp4" type="video/mp4">
+    </video>
+  </div>
+  <svg class="hero-ripple" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="260" cy="180" r="30" fill="none" stroke="var(--cream)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="70" fill="none" stroke="var(--cream)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="115" fill="none" stroke="var(--brass)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="165" fill="none" stroke="var(--brass)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="200" fill="none" stroke="var(--cream)" stroke-width="1"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <span class="tag fade-in">Douglasville, Georgia</span>
+    <h1 class="fade-in d1">Peace on the Pond gives your retreat a place that already feels like it's holding space.</h1>
+    <p class="lede fade-in d2">Ten private acres of lake, labyrinth, and quiet just outside Atlanta, built for hosts who want their group to arrive, exhale, and leave changed.</p>
+    <div class="hero-ctas fade-in d3">
+      <a class="btn btn-primary" data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Plan your retreat</a>
+      <a class="btn btn-line" href="https://www.peaceonthepond.com/retreat-space">See the grounds</a>
+      <a class="btn btn-line" data-tour href="https://potp-proposals.vercel.app/tour/">Book a private tour</a>
+    </div>
+    <p class="hero-note fade-in d3">A complimentary consultation call follows every booking request.</p>
+  </div>
+</section>
+
+<div class="facts">
+  <div class="wrap">
+    <div class="fact"><div class="num">10</div><div class="lbl">private acres</div></div>
+    <div class="fact"><div class="num">20</div><div class="lbl">guests hosted comfortably</div></div>
+    <div class="fact"><div class="num">35 min</div><div class="lbl">from Hartsfield&#8211;Jackson</div></div>
+    <div class="fact"><div class="num">5</div><div class="lbl">curated spaces on site</div></div>
+  </div>
+</div>
+
+<section id="story">
+  <div class="wrap story">
+    <div>
+      <span class="story-mark">From vision to reality</span>
+      <h2 style="font-size:clamp(26px,3.2vw,36px); margin-bottom:18px;">A home before it was ever a venue.</h2>
+      <p>Peace on the Pond began with Crystal &amp; Kevin Epps and a property with no architect and no fixed plan, just a shared decision to build something worth the faith it took. For more than two years they worked through the uncertainty of a full rebuild, at times apart, at times exhausted, but always returning to why they started.</p>
+      <p>They kept the bones of the original home out of respect for the land's history, so the place would be honored rather than erased. That care is still the standard the property is run by: a space meant to hold people gently, the way it held the Epps family through building it.</p>
+      <p class="names">Crystal &amp; Kevin Epps, Founders</p>
+    </div>
+    <div class="story-figure">
+      <img loading="lazy" decoding="async" src="media/founders.jpg" alt="The entrance gate at Peace on the Pond">
+      <div class="content">
+        <span class="est">Est. 2023 &middot; Opened 2025</span>
+        <blockquote>"We didn't build a venue first. We built a place that could hold people through something hard, then opened the gate."</blockquote>
+        <cite>The spirit behind Peace on the Pond</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="testimonial">
+  <div class="wrap">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Peace on the Pond exceeded all of my expectations. The tranquility of the private lake and the meditative labyrinth were transformative. I came for relaxation and left feeling completely rejuvenated."</blockquote>
+      <cite>Amanda L., guest at Peace on the Pond</cite>
+    </div>
+  </div>
+</section>
+
+<section id="pain">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Why this is hard</span>
+      <h2>You came to hold space for your guests. Let the space hold you, too.</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="p-item"><p>Between sessions, you're the one fielding where the towels are, what time lunch starts, and whether the chairs can move.</p></div>
+      <div class="p-item"><p>You're coordinating setup, catering, and last-minute changes instead of staying present with your group.</p></div>
+      <div class="p-item"><p>You want your guests to feel like they've stepped away from everything, which is hard when you're still holding the logistics.</p></div>
+      <div class="p-item"><p>Every venue question that lands on you is attention that isn't going to the people you came to serve.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap split">
+    <div>
+      <div class="section-head">
+        <span class="kicker">Why here</span>
+        <h2>The grounds, the pace, and the planning, already built for this.</h2>
+      </div>
+      <p>Most venues hand you a room and a checklist. Here, the property and the process are already shaped around what you're trying to create, so your energy stays on the people in the room, not on the logistics behind it.</p>
+    </div>
+    <ul class="reasons">
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Exclusive &amp; private</strong><span>Ten acres of tranquility, far from distractions and foot traffic.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Luxury meets nature</strong><span>A private lake, labyrinth, spa with sauna and jacuzzi, and the Shala, all on the grounds.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Turnkey by design</strong><span>Planning is simplified so you can stay focused on transformation.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Built for people who hold space</strong><span>Designed for thought leaders, facilitators, and healers.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Close to Atlanta</strong><span>About 35 minutes from Hartsfield&#8211;Jackson, easy for a group flying in.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="division">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The division of labor</span>
+      <h2>You hold the room. We handle what's around it.</h2>
+    </div>
+    <div class="division">
+      <div class="col">
+        <h3>YOU</h3>
+        <ul>
+          <li>Teach, guide, and facilitate</li>
+          <li>Lead your community</li>
+          <li>Set your own agenda and pace</li>
+          <li>Sell your seats</li>
+          <li>Show up and stay present</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>PEACE ON THE POND</h3>
+        <ul>
+          <li>Space setup across the greenhouse, labyrinth, lakeside decks, and spa</li>
+          <li>Access to local wellness practitioners on request, including yoga, massage, sound healing, and reiki</li>
+          <li>Catering recommendations, or space for your own chef</li>
+          <li>Event setup &amp; facilitation support, if you want it</li>
+          <li>Marketing &amp; feature opportunities on our site and social, on request</li>
+          <li>One point of contact from booking through arrival</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="grounds">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The property</span>
+      <h2>Six spaces, one property, all yours for the stay.</h2>
+    </div>
+    <div class="grounds-grid">
+      <div class="g-card lake">
+        <img loading="lazy" decoding="async" src="media/grounds-lake.jpg" alt="Private lake at Peace on the Pond">
+        <div class="g-text"><h3>Private Lake</h3><p>A quiet stretch of water for sunrise sits, sound work, or simply somewhere to exhale between sessions.</p></div>
+      </div>
+      <div class="g-card laby">
+        <img loading="lazy" decoding="async" src="media/grounds-labyrinth.jpg" alt="Labyrinth at Peace on the Pond">
+        <div class="g-text"><h3>Labyrinth</h3><p>A walking path for reflection.</p></div>
+      </div>
+      <div class="g-card spa">
+        <img loading="lazy" decoding="async" src="media/grounds-spa.jpg" alt="Spa and hot tub at Peace on the Pond">
+        <div class="g-text"><h3>Spa</h3><p>Sauna and jacuzzi on site.</p></div>
+      </div>
+      <div class="g-card green">
+        <img loading="lazy" decoding="async" src="media/grounds-greenhouse.jpg" alt="Greenhouse at Peace on the Pond">
+        <div class="g-text"><h3>Greenhouse</h3><p>A light-filled space for workshops, meals, or quiet work between sessions.</p></div>
+      </div>
+      <div class="g-card trail">
+        <img loading="lazy" decoding="async" src="media/grounds-trail.jpg" alt="Walking trail at Peace on the Pond">
+        <div class="g-text"><h3>Walking Trails</h3><p>Wooded paths across the property.</p></div>
+      </div>
+      <div class="g-card terr">
+        <img loading="lazy" decoding="async" src="media/grounds-terrace.jpg" alt="Serenity Terrace deck at Peace on the Pond">
+        <div class="g-text"><h3>Serenity Terrace</h3><p>Lakeside deck for gathering.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">More of the grounds</span>
+      <h2>A closer look around the property.</h2>
+    </div>
+    <div class="gallery-scroll">
+      <div class="g-photo"><img loading="lazy" decoding="async" src="media/gallery-1.jpg" alt="Aerial view of Peace on the Pond at dusk"><span>The estate at dusk</span></div>
+      <div class="g-photo"><img loading="lazy" decoding="async" src="media/gallery-2.jpg" alt="Covered pavilion and outdoor kitchen at Peace on the Pond"><span>Covered pavilion &amp; outdoor kitchen</span></div>
+      <div class="g-photo"><img loading="lazy" decoding="async" src="media/gallery-3.jpg" alt="Fire pit seating area by the pond"><span>Fire pit circle</span></div>
+      <div class="g-photo"><img loading="lazy" decoding="async" src="media/gallery-4.jpg" alt="Hammock lawn behind the main house"><span>Hammock lawn</span></div>
+      <div class="g-photo"><img loading="lazy" decoding="async" src="media/gallery-5.jpg" alt="Deck overlooking the pond and fountain"><span>Pond-side deck</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>How a date gets held.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="idx">01</div><div><h3>Submit a booking request</h3><p>Share your group size, goals, and preferred dates through the pre-booking questionnaire.</p></div></div>
+      <div class="step"><div class="idx">02</div><div><h3>Have a consultation call</h3><p>Within 24&#8211;48 hours, talk through your vision, group size, and agenda options, and leave with a clear quote.</p></div></div>
+      <div class="step"><div class="idx">03</div><div><h3>Secure your date</h3><p>An initial deposit locks in your date once the details are confirmed. Flexible payment options are available.</p></div></div>
+      <div class="step"><div class="idx">04</div><div><h3>Host your experience</h3><p>Arrive with your group of up to 20 and let the team handle the details, across the greenhouse, labyrinth, lakeside decks, spa, and trails.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What it costs</span>
+      <h2>Starting rates.</h2>
+      <p class="lead">Two ways to book the property, depending on whether your group is staying overnight or gathering for the day.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="label">Overnight retreats</div>
+        <div class="amount"><sup>from</sup>$3,223</div>
+        <div class="per">per night</div>
+      </div>
+      <div class="price-card">
+        <div class="label">Day experiences</div>
+        <div class="amount"><sup>from</sup>$1,888</div>
+        <div class="per">per day</div>
+      </div>
+    </div>
+    <p class="disclaimer">These are starting rates, not a final quote. Your exact price depends on group size, number of nights or days, and any add-ons you choose. We build your real number together on your consultation call, in writing, before you commit to anything.</p>
+  </div>
+</section>
+
+<section id="reserve">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Reserving your date</span>
+      <h2>A deposit secures your date.</h2>
+    </div>
+    <div class="reserve">
+      <div class="r-card">
+        <h3>Pay in full</h3>
+        <p>Reserve your dates in one payment. Your dates are locked in as soon as it's received.</p>
+      </div>
+      <div class="r-card">
+        <h3>Deposit &amp; payment plan</h3>
+        <p>Start with an initial deposit, then spread the remaining balance across a flexible schedule. Final payment is typically due 14 days before your event.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="for">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Who this is for</span>
+      <h2>Built for people leading real groups.</h2>
+    </div>
+    <div class="tags">
+      <span>Leadership &amp; executive experiences</span>
+      <span>Corporate team-building</span>
+      <span>Health &amp; wellness experiences</span>
+      <span>Yoga &amp; meditation retreats</span>
+      <span>Spiritual &amp; religious gatherings</span>
+      <span>Coaching &amp; personal development</span>
+      <span>Creative &amp; writing retreats</span>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Before you ask</span>
+      <h2>Questions we get all the time.</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>What does it actually cost?<span class="icon">+</span></summary>
+        <p class="a">Overnight retreats start at $3,223 per night, and day experiences start at $1,888 per day. Your exact quote depends on group size, nights or days, and any add-ons, and we build it with you on your consultation call.</p>
+      </details>
+      <details>
+        <summary>How many guests can I bring?<span class="icon">+</span></summary>
+        <p class="a">Up to 20 guests comfortably, with access to the lake, labyrinth, greenhouse, spa, and grounds.</p>
+      </details>
+      <details>
+        <summary>Can I bring my own facilitators?<span class="icon">+</span></summary>
+        <p class="a">Yes. You're welcome to bring your own team, or draw on our local wellness practitioners for yoga, massage, sound healing, and reiki.</p>
+      </details>
+      <details>
+        <summary>What about food for my group?<span class="icon">+</span></summary>
+        <p class="a">You can bring your own chef, or we can point you toward catering recommendations. Let us know what you need on your booking request.</p>
+      </details>
+      <details>
+        <summary>How far is it from the airport?<span class="icon">+</span></summary>
+        <p class="a">About 35 minutes from Hartsfield&#8211;Jackson Atlanta International Airport.</p>
+      </details>
+      <details>
+        <summary>How do I secure my date?<span class="icon">+</span></summary>
+        <p class="a">An initial deposit holds your date once your details and quote are confirmed. Flexible payment plans are available, with final payment typically due 14 days before your event.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="upcoming">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">On the calendar</span>
+      <h2>Currently hosted at Peace on the Pond.</h2>
+    </div>
+    <div class="events" id="events-list">
+      <div class="event">
+        <span class="date">Sat, Sep 26</span>
+        <h3>Forgiveness Retreat</h3>
+        <a class="more" href="https://www.peaceonthepond.com/event-details/forgiveness-retreat">Learn more</a>
+      </div>
+      <div class="event">
+        <span class="date">Thu, Oct 15</span>
+        <h3>C.R.E.A.T.E Mastermind</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <svg class="ripple2" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="180" cy="200" r="40" fill="none" stroke="var(--forest)" stroke-width="1" opacity="0.5"/>
+    <circle cx="180" cy="200" r="90" fill="none" stroke="var(--forest)" stroke-width="1" opacity="0.4"/>
+    <circle cx="180" cy="200" r="150" fill="none" stroke="var(--forest)" stroke-width="1" opacity="0.3"/>
+  </svg>
+  <div class="wrap cta-inner">
+    <h2>Bring your group somewhere that already feels like peace.</h2>
+    <p>Tell us about your retreat and we'll follow up within 24&#8211;48 hours with availability, pricing, and a plan for your dates.</p>
+    <div class="cta-buttons">
+      <a class="btn btn-primary" data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Inquire about your retreat</a>
+      <a class="btn btn-quiet" data-tour href="https://potp-proposals.vercel.app/tour/">Book a private tour</a>
+    </div>
+    <p class="phone">Or call <a data-phone data-phone-text href="tel:+14244821765">(424) 482-1765</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="foot-brand" href="https://www.peaceonthepond.com">
+          <img loading="lazy" decoding="async" src="media/logo-wordmark.png" alt="Peace on the Pond">
+        </a>
+        <p style="margin-top:14px; font-size:14.5px; opacity:0.75; max-width:280px;">A private 10-acre retreat venue in Douglasville, Georgia, about 35 minutes from Atlanta.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="https://www.peaceonthepond.com">Home</a></li>
+          <li><a data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Book the venue</a></li>
+          <li><a data-tour href="https://potp-proposals.vercel.app/tour/">Book a private tour</a></li>
+          <li><a href="https://www.peaceonthepond.com/our-story">Our story</a></li>
+          <li><a href="https://www.peaceonthepond.com/retreat-space">Space &amp; amenities</a></li>
+          <li><a href="https://www.peaceonthepond.com/contact-us">Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a data-phone data-phone-text href="tel:+14244821765">(424) 482-1765</a></li>
+        </ul>
+        <div class="social" style="margin-top:14px;">
+          <a href="https://www.instagram.com/_peaceonthepond_" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558843480266" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h-2a2 2 0 0 0-2 2v3H9v3h2v6h3v-6h2.2l.8-3H14v-2a1 1 0 0 1 1-1h2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Peace on the Pond. All rights reserved.</span>
+      <span>Douglasville, Georgia</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ======================================================================
+   Events and contact links come from your admin page.
+   If your proposals site has a different address, change the line below
+   (keep the quotes). Example: "https://proposals.peaceonthepond.com"
+   ====================================================================== */
+const PROPOSALS_SITE = "https://potp-proposals.vercel.app";
+
+// Tour buttons point to the tour page on your proposals site.
+document.querySelectorAll("[data-tour]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/tour/"));
+
+(async () => {
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const day = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  try {
+    const r = await fetch(PROPOSALS_SITE.replace(/\/$/, "") + "/api/events");
+    if (!r.ok) return;
+    const { events, settings } = await r.json();
+
+    if (settings && settings.phone) {
+      const digits = settings.phone.replace(/\D/g, "");
+      const tel = "tel:+" + (digits.length === 10 ? "1" + digits : digits);
+      document.querySelectorAll("[data-phone]").forEach((a) => (a.href = tel));
+      document.querySelectorAll("[data-phone-text]").forEach((a) => (a.textContent = settings.phone));
+    }
+    if (settings && settings.bookingUrl) {
+      document.querySelectorAll("[data-booking]").forEach((a) => (a.href = settings.bookingUrl));
+    }
+
+    const list = document.getElementById("events-list");
+    const section = document.getElementById("upcoming");
+    if (!list || !Array.isArray(events)) return;
+    if (!events.length) { section.hidden = true; return; }
+    list.innerHTML = events.map((e) => {
+      const when = day(e.date) + (e.endDate && e.endDate !== e.date ? " to " + day(e.endDate) : "") + (e.time ? ", " + e.time : "");
+      return '<div class="event"><span class="date">' + esc(when) + '</span><h3>' + esc(e.title) + '</h3>' +
+        (e.description ? '<p class="desc">' + esc(e.description) + '</p>' : '') +
+        (e.link ? '<a class="more" href="' + esc(e.link) + '">' + esc(e.linkLabel || "Learn more") + '</a>' : '') + '</div>';
+    }).join("");
+  } catch (err) {
+    /* If the admin site can't be reached, the events written in this page stay as they are. */
+  }
+})();
+</script>
+<div class="action-bar" role="navigation" aria-label="Quick actions">
+  <a class="btn btn-quiet" data-phone href="tel:+14244821765">Call now</a>
+  <a class="btn btn-primary" data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Pre-booking form</a>
+</div>
+</body>
+</html>
