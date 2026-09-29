@@ -360,7 +360,7 @@
     </a>
     <div class="nav-actions">
       <a class="btn btn-quiet btn-nav" data-phone href="tel:+14244821765" aria-label="Call Peace on the Pond">Call</a>
-      <a class="btn btn-primary btn-nav" data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Inquire</a>
+      <a class="btn btn-primary btn-nav" data-call href="https://potp-proposals.vercel.app/call/">Inquire</a>
     </div>
   </nav>
 </header>
@@ -383,7 +383,7 @@
     <h1 class="fade-in d1">Peace on the Pond gives your retreat a place that already feels like it's holding space.</h1>
     <p class="lede fade-in d2">Ten private acres of lake, labyrinth, and quiet just outside Atlanta, built for hosts who want their group to arrive, exhale, and leave changed.</p>
     <div class="hero-ctas fade-in d3">
-      <a class="btn btn-primary" data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Plan your retreat</a>
+      <a class="btn btn-primary" data-call href="https://potp-proposals.vercel.app/call/">Plan your retreat</a>
       <a class="btn btn-line" href="https://www.peaceonthepond.com/retreat-space">See the grounds</a>
       <a class="btn btn-line" data-tour href="https://potp-proposals.vercel.app/tour/">Book a private tour</a>
     </div>
@@ -687,7 +687,7 @@
     <h2>Bring your group somewhere that already feels like peace.</h2>
     <p>Tell us about your retreat and we'll follow up within 24&#8211;48 hours with availability, pricing, and a plan for your dates.</p>
     <div class="cta-buttons">
-      <a class="btn btn-primary" data-booking href="https://www.peaceonthepond.com/pre-booking-questionnaire">Inquire about your retreat</a>
+      <a class="btn btn-primary" data-call href="https://potp-proposals.vercel.app/call/">Inquire about your retreat</a>
       <a class="btn btn-quiet" data-tour href="https://potp-proposals.vercel.app/tour/">Book a private tour</a>
     </div>
     <p class="phone">Or call <a data-phone data-phone-text href="tel:+14244821765">(424) 482-1765</a></p>
@@ -746,6 +746,8 @@ const PROPOSALS_SITE = "https://potp-proposals.vercel.app";
 
 // Tour buttons point to the tour page on your proposals site.
 document.querySelectorAll("[data-tour]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/tour/"));
+// Inquire buttons open the discovery call booking page.
+document.querySelectorAll("[data-call]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/call/"));
 
 (async () => {
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
