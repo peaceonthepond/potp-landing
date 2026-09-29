@@ -29,3 +29,14 @@ proposals site. If your proposals site's address is not
 `https://potp-proposals.vercel.app`, edit the line near the bottom of
 `index.html` that starts with `const PROPOSALS_SITE =` and put your
 proposals site's address between the quotes.
+
+## Testimonials
+
+Testimonials featured in the admin page (Operations > Feedback and
+testimonials) rotate in the testimonial section, after Amanda's.
+
+## Courses and shop
+
+Footer links go to the courses page and shop on the proposals site. The
+"Learn with us" section lists published courses automatically and stays
+hidden when none are published.

@@ -422,7 +422,7 @@
 
 <section class="alt" id="testimonial">
   <div class="wrap">
-    <div class="testimonial">
+    <div class="testimonial" id="testimonial">
       <div class="stars">★★★★★</div>
       <blockquote>"Peace on the Pond exceeded all of my expectations. The tranquility of the private lake and the meditative labyrinth were transformative. I came for relaxation and left feeling completely rejuvenated."</blockquote>
       <cite>Amanda L., guest at Peace on the Pond</cite>
@@ -437,7 +437,7 @@
       <h2>You came to hold space for your guests. Let the space hold you, too.</h2>
     </div>
     <div class="pain-grid">
-      <div class="p-item"><p>Between sessions, you're the one fielding where things are, what time lunch starts, and whether the chairs can move.</p></div>
+      <div class="p-item"><p>Between sessions, you're the one fielding where the towels are, what time lunch starts, and whether the chairs can move.</p></div>
       <div class="p-item"><p>You're coordinating setup, catering, and last-minute changes instead of staying present with your group.</p></div>
       <div class="p-item"><p>You want your guests to feel like they've stepped away from everything, which is hard when you're still holding the logistics.</p></div>
       <div class="p-item"><p>Every venue question that lands on you is attention that isn't going to the people you came to serve.</p></div>
@@ -572,7 +572,7 @@
     <div class="price-grid">
       <div class="price-card">
         <div class="label">Overnight retreats</div>
-        <div class="amount"><sup>from</sup>$3,350</div>
+        <div class="amount"><sup>from</sup>$3,223</div>
         <div class="per">per night</div>
       </div>
       <div class="price-card">
@@ -631,7 +631,7 @@
     <div class="faq">
       <details open>
         <summary>What does it actually cost?<span class="icon">+</span></summary>
-        <p class="a">Overnight retreats start at $3,350 per night, and day experiences start at $1,888 per day. Your exact quote depends on group size, nights or days, and any add-ons, and we build it with you on your consultation call.</p>
+        <p class="a">Overnight retreats start at $3,223 per night, and day experiences start at $1,888 per day. Your exact quote depends on group size, nights or days, and any add-ons, and we build it with you on your consultation call.</p>
       </details>
       <details>
         <summary>How many guests can I bring?<span class="icon">+</span></summary>
@@ -654,6 +654,18 @@
         <p class="a">An initial deposit holds your date once your details and quote are confirmed. Flexible payment plans are available, with final payment typically due 21 days before your event.</p>
       </details>
     </div>
+  </div>
+</section>
+
+<section id="learn" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Learn with us</span>
+      <h2>Courses for healers, leaders, and builders.</h2>
+      <p class="lead">Immersive programs held at Peace on the Pond and online, each with its own workbook to carry the work home.</p>
+    </div>
+    <div class="events" id="courses-list"></div>
+    <p style="margin-top:22px"><a class="btn btn-quiet" data-courses href="https://potp-proposals.vercel.app/courses/">See all courses</a> <a class="btn btn-quiet" data-shop href="https://potp-proposals.vercel.app/shop/" style="margin-left:8px">Visit the shop</a></p>
   </div>
 </section>
 
@@ -709,6 +721,8 @@
           <li><a href="https://www.peaceonthepond.com">Home</a></li>
           <li><a data-call href="https://potp-proposals.vercel.app/call/">Book the venue</a></li>
           <li><a data-tour href="https://potp-proposals.vercel.app/tour/">Book a private tour</a></li>
+          <li><a data-courses href="https://potp-proposals.vercel.app/courses/">Courses</a></li>
+          <li><a data-shop href="https://potp-proposals.vercel.app/shop/">Shop</a></li>
           <li><a href="https://www.peaceonthepond.com/our-story">Our story</a></li>
           <li><a href="https://www.peaceonthepond.com/retreat-space">Space &amp; amenities</a></li>
           <li><a href="https://www.peaceonthepond.com/contact-us">Contact us</a></li>
@@ -746,6 +760,21 @@ const PROPOSALS_SITE = "https://potp-proposals.vercel.app";
 
 // Tour buttons point to the tour page on your proposals site.
 document.querySelectorAll("[data-tour]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/tour/"));
+// Courses and shop live on the proposals site too.
+document.querySelectorAll("[data-courses]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/courses/"));
+document.querySelectorAll("[data-shop]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/shop/"));
+// Published courses appear in "Learn with us" (the section stays hidden until there is one).
+fetch(PROPOSALS_SITE.replace(/\/$/, "") + "/api/courses").then((r) => r.json()).then((d) => {
+  const list = (d && d.courses) || [];
+  if (!list.length) return;
+  const e = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const base = PROPOSALS_SITE.replace(/\/$/, "");
+  document.getElementById("courses-list").innerHTML = list.slice(0, 6).map((c) =>
+    '<div class="event"><span class="date">' + e(c.brand) + ' presents</span><h3>' + e(c.title) + '</h3>' +
+    (c.subtitle ? '<p class="desc">' + e(c.subtitle) + '</p>' : '') +
+    '<a class="more" href="' + base + '/courses/?c=' + encodeURIComponent(c.slug) + '">' + (c.enrollment === "apply" ? "Learn more and apply" : "Learn more and enroll") + '</a></div>').join("");
+  document.getElementById("learn").hidden = false;
+}).catch(() => {});
 // Inquire buttons open the discovery call booking page.
 document.querySelectorAll("[data-call]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/call/"));
 
@@ -755,7 +784,8 @@ document.querySelectorAll("[data-call]").forEach((a) => (a.href = PROPOSALS_SITE
   try {
     const r = await fetch(PROPOSALS_SITE.replace(/\/$/, "") + "/api/events");
     if (!r.ok) return;
-    const { events, settings } = await r.json();
+    const data = await r.json();
+    const { events, settings } = data;
 
     if (settings && settings.phone) {
       const digits = settings.phone.replace(/\D/g, "");
@@ -765,6 +795,19 @@ document.querySelectorAll("[data-call]").forEach((a) => (a.href = PROPOSALS_SITE
     }
     if (settings && settings.bookingUrl) {
       document.querySelectorAll("[data-booking]").forEach((a) => (a.href = settings.bookingUrl));
+    }
+
+    // Testimonials you feature from the admin page rotate here (Amanda's stays as the first one).
+    const featured = Array.isArray(data.testimonials) ? data.testimonials.filter((t) => t.text) : [];
+    const tbox = document.getElementById("testimonial");
+    if (tbox && featured.length) {
+      const all = [{ html: tbox.innerHTML }, ...featured.map((t) => ({ html: '<div class="stars">' + "★".repeat(t.rating || 5) + "</div><blockquote>\u201C" + esc(t.text) + "\u201D</blockquote><cite>" + esc(t.name) + ", guest at Peace on the Pond</cite>" }))];
+      let i = 0;
+      tbox.style.transition = "opacity .5s ease";
+      setInterval(() => {
+        tbox.style.opacity = "0";
+        setTimeout(() => { i = (i + 1) % all.length; tbox.innerHTML = all[i].html; tbox.style.opacity = "1"; }, 500);
+      }, 8000);
     }
 
     const list = document.getElementById("events-list");
