@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposal Admin | Peace on the Pond</title>
+<link rel="icon" href="/media/logo_header.png">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nanum+Myeongjo:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<section class="login" id="login" hidden>
+  <form class="login-card" id="login-form">
+    <img src="/media/logo_header.png" alt="">
+    <h1 style="font-size:24px">Proposal admin</h1>
+    <p>Sign in to create and manage client proposals.</p>
+    <input type="password" id="pw" placeholder="Admin password" aria-label="Admin password" required autocomplete="current-password">
+    <button class="btn btn-primary" style="width:100%" type="submit">Sign in</button>
+    <p class="warn" id="login-error" role="alert" style="margin-top:12px"></p>
+  </form>
+</section>
+
+<div class="shell" id="shell" hidden>
+  <nav class="side">
+    <div class="brand"><img src="/media/logo_header.png" alt=""><span>Peace on the Pond</span></div>
+    <button data-nav="home">Home</button>
+    <button data-nav="cal">Calendar</button>
+    <button data-nav="disc">Discovery calls</button>
+    <button data-nav="list" aria-current="page">Proposals</button>
+    <button data-nav="new">New proposal</button>
+    <button data-nav="events">Landing page events</button>
+    <button id="logout" style="margin-top:auto">Sign out</button>
+  </nav>
+
+  <main>
+    <div class="banner" id="db-banner" hidden>
+      <b>Connect the database to save proposals</b>
+      You can look around, but new proposals can't be saved until the database is connected:
+      <ol>
+        <li>In Vercel, open your project and go to the <strong>Storage</strong> tab.</li>
+        <li>Choose <strong>Create Database</strong>, pick <strong>Upstash for Redis</strong> (free plan), and connect it to this project.</li>
+        <li>Go to <strong>Deployments</strong> and redeploy, then refresh this page.</li>
+      </ol>
+    </div>
+
+
+    <!-- HOME -->
+    <section id="view-home" hidden>
+      <div class="head">
+        <div><h1 id="home-hello">Good day</h1><p>What needs your attention.</p></div>
+        <div class="disc-tools"><button class="btn btn-quiet" data-nav="disc">New discovery call</button><button class="btn btn-primary" data-nav="new">New proposal</button></div>
+      </div>
+      <div id="home-body"><p class="empty">Loading…</p></div>
+    </section>
+    <!-- LIST -->
+    <section id="view-list">
+      <div class="head">
+        <div><h1>Proposals</h1><p>Every proposal, its access code, and what each group has paid.</p></div>
+        <button class="btn btn-primary" data-nav="new">New proposal</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Client</th><th>Retreat dates</th><th>Access code</th><th>Paid so far</th><th>Status</th><th></th></tr></thead>
+        <tbody id="rows"><tr><td colspan="6" class="empty">Loading proposals…</td></tr></tbody>
+      </table></div>
+    </section>
+
+    <!-- EDITOR -->
+    <section id="view-edit" hidden>
+      <div class="head">
+        <div><h1 id="edit-title">New proposal</h1><p>Totals, dates, and shares calculate as you type.</p></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-quiet" id="tab-form" aria-pressed="true">Details</button>
+          <button class="btn btn-quiet" id="tab-preview" aria-pressed="false">Preview</button>
+        </div>
+      </div>
+
+      <div class="editor">
+        <div>
+          <form id="form" autocomplete="off">
+            <div class="card">
+              <h2>Client</h2>
+              <div class="grid3">
+                <label>Full name<input type="text" name="clientName" required></label>
+                <label>Greeting name<input type="text" name="firstName" placeholder='For "Dear ___,"'></label>
+                <label>Group or organization<input type="text" name="group"></label>
+              </div>
+              <label style="margin-top:14px;max-width:420px">Client email <small>private, only used for the Email client button</small><input type="email" name="clientEmail"></label>
+            </div>
+
+            <div class="card">
+              <h2>Retreat</h2>
+              <div class="grid2" style="margin-bottom:14px">
+                <label>Retreat title<input type="text" name="title" placeholder="The ___ Retreat"></label>
+                <label>Capacity<input type="text" name="capacity"></label>
+              </div>
+              <div class="grid2">
+                <label>Arrival date<input type="date" name="startDate" required></label>
+                <label>Departure date<input type="date" name="endDate" required></label>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2>Letter</h2>
+              <p class="hint">Your standard welcome is filled in. Leave a blank line between paragraphs.</p>
+              <textarea name="letter" rows="7"></textarea>
+            </div>
+
+            <div class="card">
+              <h2>What we heard from you <small style="font-family:var(--sans);font-size:13px;color:var(--muted)">optional</small></h2>
+              <p class="hint">A short recap shown on the proposal, so the client sees you listened. Leave empty to hide it.</p>
+              <div id="recap"></div>
+              <button type="button" class="add-line" id="add-recap">Add a line</button>
+              <label class="toggle" style="margin-top:12px"><input type="checkbox" name="recapGuests" style="accent-color:var(--forest)"> Also show this to guests (split proposals)</label>
+            </div>
+
+            <div class="card">
+              <h2>Suggested enhancements <small style="font-family:var(--sans);font-size:13px;color:var(--muted)">optional</small></h2>
+              <p class="hint">These get a "Suggested for you" tag on the proposal. Pre-checked from the discovery call.</p>
+              <div class="checks" id="recommended"></div>
+            </div>
+
+            <div class="card">
+              <h2>Package and price</h2>
+              <div class="grid2" style="margin-bottom:14px">
+                <label>Package name<input type="text" name="packageName"></label>
+                <label>Nightly rate<span class="money"><input type="number" name="nightlyRate" min="0" step="1"></span></label>
+              </div>
+              <label>Includes <input type="text" name="lineItem" placeholder="venue access with breakfast"></label>
+              <h3 style="font-size:15px;margin-top:18px">What's included</h3>
+              <div class="list-edit" id="inclusions"></div>
+              <button type="button" class="add-line" id="add-inclusion" style="margin-top:8px">Add a line</button>
+              <h3 style="font-size:15px;margin-top:22px">Wellness enhancements included at no charge</h3>
+              <div class="checks" id="included"></div>
+              <div class="custom-add"><input type="text" id="custom-enh" placeholder="Add another included experience"><button type="button" class="btn btn-quiet" id="add-enh">Add</button></div>
+              <details class="more">
+                <summary>Adjust the total</summary>
+                <p class="hint" style="margin-top:8px">Leave blank to use nightly rate × nights. Use this for a special package price.</p>
+                <label style="max-width:240px">Total price<span class="money"><input type="number" name="totalOverride" min="0" step="1"></span></label>
+              </details>
+            </div>
+
+            <div class="card">
+              <h2>Partner lodging <small style="font-family:var(--sans);font-size:13px;color:var(--muted)">optional</small></h2>
+              <p class="hint">For guests staying with a preferred lodging partner. Each option can link to the partner's booking page, let guests pay through you, or both.</p>
+              <div id="lodging"></div>
+              <button type="button" class="add-line" id="add-lodging">Add a lodging option</button>
+            </div>
+
+            <div class="card">
+              <h2>Payment terms</h2>
+              <div class="grid2" style="margin-bottom:16px">
+                <label>How is this retreat paid?
+                  <select name="paymentMode">
+                    <option value="single">One payer covers the full cost</option>
+                    <option value="split">Split between several people</option>
+                  </select></label>
+                <label id="split-row">Split between how many people?<input type="number" name="groupSize" min="2" max="100"></label>
+              </div>
+              <p class="hint" id="mode-hint"></p>
+              <div class="grid3">
+                <label>Retainer<span style="display:flex;gap:6px;align-items:center"><input type="number" name="retainerPct" min="0" max="100"> %</span></label>
+                <label>Balance due<span style="display:flex;gap:6px;align-items:center"><input type="number" name="dueDays" min="0" max="365"> days before</span></label>
+                <label class="toggle" style="align-self:end;padding-bottom:10px"><input type="checkbox" name="showPayerNames" style="accent-color:var(--forest)"> Show the group who has paid</label>
+              </div>
+              <details class="more">
+                <summary>Set an exact retainer amount</summary>
+                <label style="max-width:240px;margin-top:10px">Retainer amount<span class="money"><input type="number" name="retainerOverride" min="0" step="1"></span></label>
+              </details>
+              <h3 style="font-size:15px;margin-top:20px">Terms</h3>
+              <p class="hint">Blank line between paragraphs. {firstName} becomes the client's name.</p>
+              <textarea name="terms" rows="8"></textarea>
+            </div>
+
+            <div class="card">
+              <h2>Access codes</h2>
+              <p class="hint">Created for you. Change either one to anything memorable.</p>
+              <label style="margin-bottom:12px">Organizer code <small>shows everything: total, retainer, balance, and payment progress</small>
+                <span class="codebox"><input type="text" name="accessCode" maxlength="24"><button type="button" class="btn btn-quiet" id="regen">New code</button></span></label>
+              <label id="guest-code-row">Guest code <small>for the group: shows the total and lets each guest pay their share, without the retainer, balance, or progress</small>
+                <span class="codebox"><input type="text" name="guestCode" maxlength="24"><button type="button" class="btn btn-quiet" id="regen-guest">New code</button></span></label>
+              <label class="toggle" style="margin-top:14px"><input type="checkbox" name="active" style="accent-color:var(--forest)"> Proposal is live (the code works)</label>
+            </div>
+          </form>
+          <div id="preview" hidden></div>
+        </div>
+
+        <aside class="rail">
+          <div class="sum">
+            <h3>What the client will see</h3>
+            <div class="big" id="s-total">$0</div>
+            <div class="sub" id="s-rate"></div>
+            <dl>
+              <div><dt>Dates</dt><dd id="s-dates">Choose dates</dd></div>
+              <div><dt>Retainer</dt><dd id="s-ret"></dd></div>
+              <div><dt>Balance</dt><dd id="s-bal"></dd></div>
+              <div><dt>Balance due by</dt><dd id="s-due"></dd></div>
+              <div id="s-share-row"><dt>Each share</dt><dd id="s-share"></dd></div>
+            </dl>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" id="publish">Publish proposal</button>
+            <button class="btn btn-quiet" data-nav="list">Cancel</button>
+          </div>
+          <p class="warn" id="warn" role="alert"></p>
+          <p class="warn" id="overlap" role="status"></p>
+          <div id="activity" class="activity" hidden></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="view-events" hidden>
+      <div class="head">
+        <div><h1>Landing page events</h1><p>What shows under "On the calendar" on your landing page. Events disappear on their own once their date passes.</p></div>
+        <button class="btn btn-primary" id="ev-new">Add event</button>
+      </div>
+
+      <div class="card" id="ev-form-card" hidden>
+        <h2 id="ev-form-title">Add event</h2>
+        <form id="ev-form" autocomplete="off">
+          <div class="grid3" style="margin-bottom:14px">
+            <label>Date<input type="date" name="date" required></label>
+            <label>End date <input type="date" name="endDate" aria-label="End date, for multi-day events"></label>
+            <label>Time<input type="text" name="time" placeholder="e.g. 10 AM–4 PM"></label>
+          </div>
+          <label style="margin-bottom:14px">Event name<input type="text" name="title" required></label>
+          <label style="margin-bottom:14px">Short description <textarea name="description" rows="3" style="min-height:80px;font-family:var(--sans);font-size:15px" placeholder="Optional, one or two sentences"></textarea></label>
+          <div class="grid2">
+            <label>Link for details or tickets<input type="text" name="link" placeholder="https://www.peaceonthepond.com/event-details/..."></label>
+            <label>Link text<input type="text" name="linkLabel" placeholder="Learn more"></label>
+          </div>
+          <p class="hint" style="margin-top:10px">End date is only for events longer than one day. Leave the link blank if there's no event page yet.</p>
+          <div style="display:flex;gap:10px;margin-top:16px">
+            <button class="btn btn-primary" type="submit">Save event</button>
+            <button class="btn btn-quiet" type="button" id="ev-cancel">Cancel</button>
+          </div>
+          <p class="warn" id="ev-warn" role="alert"></p>
+        </form>
+      </div>
+
+      <div class="table-wrap" style="margin-bottom:26px"><table>
+        <thead><tr><th>Date</th><th>Event</th><th>Link</th><th>On the site</th><th></th></tr></thead>
+        <tbody id="ev-rows"><tr><td colspan="5" class="empty">Loading events…</td></tr></tbody>
+      </table></div>
+
+      <div class="card">
+        <h2>Contact links</h2>
+        <p class="hint">Used by the Call and Pre-booking form buttons on your landing page.</p>
+        <form id="st-form" class="grid2" autocomplete="off">
+          <label>Phone number<input type="text" name="phone" inputmode="tel"></label>
+          <label>Pre-booking form link<input type="text" name="bookingUrl"></label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" type="submit">Save contact links</button>
+            <button class="btn btn-quiet" type="button" id="st-use-call">Use my call booking page</button></div>
+        </form>
+        <p class="warn" id="st-warn" role="alert"></p>
+      </div>
+    </section>
+
+
+    <!-- CALENDAR -->
+    <section id="view-cal" hidden>
+      <div class="head">
+        <div><h1 id="cal-title">Calendar</h1><p>Booked retreats, discovery calls, and private tours.</p></div>
+        <div class="disc-tools">
+          <button class="btn btn-quiet" id="cal-prev" aria-label="Previous month">‹</button>
+          <button class="btn btn-quiet" id="cal-today">Today</button>
+          <button class="btn btn-quiet" id="cal-next" aria-label="Next month">›</button>
+          <button class="btn btn-primary" id="tour-add">Add a tour</button>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="k-retreat"></i>Booked retreat</span>
+        <span><i class="k-pending"></i>Proposed (not paid yet)</span>
+        <span><i class="k-call"></i>Discovery call</span>
+        <span><i class="k-tour"></i>Private tour</span>
+        <span><i class="k-request"></i>Tour request</span>
+      </div>
+      <div class="cal-wrap"><div class="cal" id="cal"></div></div>
+
+      <div class="home-grid" style="margin-top:22px">
+        <div class="home-card" id="tour-requests-card"></div>
+        <div class="home-card">
+          <h2>Show this calendar in Outlook</h2>
+          <p class="hint" style="margin:0 0 10px">Subscribe once and your retreats, calls, and tours appear in Outlook automatically. Outlook refreshes it every few hours.</p>
+          <ol class="steps-sm">
+            <li>Click <b>Copy calendar link</b>.</li>
+            <li>In Outlook.com, open <b>Calendar</b>, then <b>Add calendar</b>, then <b>Subscribe from web</b>.</li>
+            <li>Paste the link, name it "Peace on the Pond," and click <b>Import</b>.</li>
+          </ol>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-primary" id="cal-copy">Copy calendar link</button>
+            <button class="btn btn-quiet" id="cal-regen">Make a new link</button>
+          </div>
+          <p class="hint" style="margin-top:10px">Keep this link private. If it's ever shared by mistake, make a new link and subscribe again.</p>
+        </div>
+      </div>
+    </section>
+    <!-- DISCOVERY LIST -->
+    <section id="view-disc-list" hidden>
+      <div class="head">
+        <div><h1>Discovery calls</h1><p>Notes and details from each call, ready to turn into a proposal.</p></div>
+        <button class="btn btn-primary" id="disc-new">New discovery call</button>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Client</th><th>Call date</th><th>Status</th><th>Prep form</th><th></th></tr></thead>
+        <tbody id="disc-rows"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
+      </table></div>
+    </section>
+
+    <!-- DISCOVERY RECORD -->
+    <section id="view-disc" hidden>
+      <div class="head">
+        <div>
+          <h1 id="disc-title">New discovery call</h1>
+          <p><span id="disc-saved" class="saved-note">Changes save automatically.</span></p>
+        </div>
+        <div class="disc-tools">
+          <button class="btn btn-quiet" id="disc-back" data-nav="disc">All calls</button>
+          <button class="btn btn-quiet" id="disc-prep-copy">Copy prep form link</button>
+          <a class="btn btn-quiet" id="disc-prep-email">Email prep form</a>
+          <a class="btn btn-quiet" id="disc-tour">Email tour invite</a>
+          <a class="btn btn-quiet" id="disc-sheet" target="_blank" rel="noopener">Hospitality sheet</a>
+          <button class="btn btn-primary" id="disc-proposal">Create proposal</button>
+        </div>
+      </div>
+
+      <div class="banner" id="disc-prep-banner" hidden></div>
+
+      <div class="editor">
+        <div>
+          <div class="card">
+            <div class="grid3">
+              <label>Status<select id="disc-status"></select></label>
+              <label>Call date<input type="date" id="disc-date"></label>
+              <label>Call time<input type="text" id="disc-time" placeholder="e.g. 2:30 PM"></label>
+            </div>
+          </div>
+          <form id="disc-form" autocomplete="off"></form>
+          <p style="margin-top:6px"><button class="btn btn-quiet danger-btn" id="disc-delete" type="button">Delete this record</button></p>
+        </div>
+
+        <aside class="rail">
+          <div class="card">
+            <h2>Transcript or note taker summary</h2>
+            <p class="hint">Paste the transcript or summary from your note taker here to keep it with this record.</p>
+            <textarea id="disc-ai" rows="12" placeholder="Paste the transcript or summary"></textarea>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="scrim" id="done" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="done-h">
+    <h2 id="done-h" style="font-size:22px">Proposal published</h2>
+    <p style="color:var(--muted);margin:0">It's live now. Here are its two codes:</p>
+    <div class="grid2" style="gap:10px">
+      <div><small style="font-weight:600">For the organizer</small><div class="code-big" id="done-code" style="margin:6px 0 14px;font-size:20px"></div></div>
+      <div><small style="font-weight:600">For their guests</small><div class="code-big" id="done-guest" style="margin:6px 0 14px;font-size:20px"></div></div>
+    </div>
+    <label>Ready-to-send email<textarea id="done-msg" rows="11"></textarea></label>
+    <div class="actions">
+      <a class="btn btn-quiet" id="done-view" target="_blank" rel="noopener">View as client</a>
+      <a class="btn btn-quiet" id="done-email">Open in my email</a>
+      <button class="btn btn-quiet" id="done-close">Done</button>
+      <button class="btn btn-primary" id="done-copy">Copy message</button>
+    </div>
+  </div>
+</div>
+<div class="scrim" id="tour-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tour-h" style="width:min(600px,100%);max-height:90vh;overflow:auto">
+    <h2 id="tour-h" style="font-size:22px">Private tour</h2>
+    <form id="tour-form" autocomplete="off" style="display:grid;gap:12px">
+      <div class="grid2">
+        <label>Name<input type="text" name="name"></label>
+        <label>Email<input type="email" name="email"></label>
+        <label>Phone<input type="text" name="phone"></label>
+        <label>Guests<input type="number" name="guests" min="1" max="50"></label>
+      </div>
+      <div id="tour-times"></div>
+      <div class="grid2">
+        <label>Tour date<input type="date" name="confirmedDate"></label>
+        <label>Start time<input type="time" name="confirmedTime" step="900"></label>
+      </div>
+      <label>Note<textarea name="note" rows="2" style="min-height:60px;font-family:var(--sans);font-size:14.5px"></textarea></label>
+      <label>Status<select name="status"><option>Requested</option><option>Confirmed</option><option>Completed</option><option>Declined</option><option>Canceled</option></select></label>
+      <p class="warn" id="tour-warn" role="alert"></p>
+      <div class="actions" style="justify-content:space-between">
+        <button type="button" class="btn btn-quiet danger-btn" id="tour-delete">Delete</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button type="button" class="btn btn-quiet" id="tour-close">Close</button>
+          <button type="button" class="btn btn-quiet" id="tour-decline">Decline</button>
+          <button type="submit" class="btn btn-primary" id="tour-confirm">Confirm tour</button>
+        </div>
+      </div>
+      <p class="hint" style="margin:0">Confirming opens a confirmation email to the visitor, ready to send.</p>
+    </form>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "statuses": ["Call scheduled", "Call done", "Proposal sent", "Booked", "Not moving forward"],
+  "sections": [
+    { "title": "Contact", "fields": [
+      { "key": "name", "label": "Full name", "type": "text", "prep": true, "required": true },
+      { "key": "email", "label": "Email", "type": "email", "prep": true },
+      { "key": "phone", "label": "Phone", "type": "text", "prep": true },
+      { "key": "organization", "label": "Group or organization", "type": "text", "prep": true },
+      { "key": "source", "label": "How they found us", "type": "text" }
+    ]},
+    { "title": "The retreat", "fields": [
+      { "key": "retreatType", "label": "Type of retreat or experience", "type": "text", "prep": true, "placeholder": "e.g. women's wellness, leadership, birthday" },
+      { "key": "datesPreferred", "label": "Preferred dates, with backups", "type": "text", "prep": true },
+      { "key": "startDate", "label": "Arrival date (if set)", "type": "date" },
+      { "key": "endDate", "label": "Departure date (if set)", "type": "date" },
+      { "key": "guests", "label": "Number of guests", "type": "number", "prep": true },
+      { "key": "stayType", "label": "Overnight or day", "type": "select", "options": ["Not sure yet", "Overnight", "Day retreat"], "prep": true },
+      { "key": "payment", "label": "Who is paying", "type": "select", "options": ["Not sure yet", "One payer covers the full cost", "Split between several people", "Guests pay through a partnership"] }
+    ]},
+    { "title": "Intention", "fields": [
+      { "key": "purpose", "label": "Purpose of the retreat", "type": "textarea", "prep": true, "prepLabel": "What is the heart or purpose of your retreat?" },
+      { "key": "feel", "label": "What guests should feel and take home", "type": "textarea", "prep": true, "prepLabel": "How do you want your guests to feel, and what should they take home?" }
+    ]},
+    { "title": "Food", "fields": [
+      { "key": "foodInterests", "label": "Food interests and cuisine", "type": "textarea", "prep": true },
+      { "key": "dietary", "label": "Dietary restrictions and allergies", "type": "textarea", "prep": true, "important": true },
+      { "key": "meals", "label": "Meal plans (chef service, hibachi, catering)", "type": "text" }
+    ]},
+    { "title": "Look and feel", "fields": [
+      { "key": "colors", "label": "Decor colors", "type": "text", "prep": true },
+      { "key": "theme", "label": "Theme or style", "type": "text", "prep": true },
+      { "key": "celebration", "label": "Celebrating anything special?", "type": "text", "prep": true }
+    ]},
+    { "title": "Experiences", "fields": [
+      { "key": "interests", "label": "Modalities and enhancements they're drawn to", "type": "checks" },
+      { "key": "otherIdeas", "label": "Other experience ideas", "type": "textarea", "prep": true, "prepLabel": "Any experiences or activities you're hoping to include?" }
+    ]},
+    { "title": "Logistics", "fields": [
+      { "key": "lodging", "label": "Lodging needs", "type": "text", "prep": true },
+      { "key": "accessibility", "label": "Accessibility needs", "type": "text", "prep": true },
+      { "key": "agenda", "label": "Agenda or schedule ideas", "type": "textarea" },
+      { "key": "budget", "label": "Budget range", "type": "text", "prep": true }
+    ]},
+    { "title": "Notes", "fields": [
+      { "key": "notes", "label": "Call notes", "type": "textarea", "big": true },
+      { "key": "followUps", "label": "Follow-ups after the call", "type": "textarea" },
+      { "key": "anythingElse", "label": "Anything else (from the client)", "type": "textarea", "prep": true, "prepLabel": "Anything else we should know?" }
+    ]}
+  ]
+}

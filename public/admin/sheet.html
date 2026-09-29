@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light only">
+<title>Hospitality sheet | Peace on the Pond</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fcfaf0;--sand:#e5d8c6;--forest:#1b5642;--gold:#cca456;--gold-ink:#8a6a2a;--ink:#000;--muted:#4a463d;--line:rgba(0,0,0,.18);
+  --serif:'Libre Baskerville',Baskerville,Georgia,serif;--sans:'Work Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color-scheme:light only}
+*{box-sizing:border-box}
+body{margin:0;background:#e9e4da;color:var(--ink);font:14px/1.5 var(--sans)}
+.bar{display:flex;justify-content:center;gap:10px;padding:16px}
+.bar button{font:600 14px var(--sans);padding:11px 22px;border-radius:999px;border:0;background:var(--forest);color:var(--cream);cursor:pointer}
+.page{width:min(8.5in,100% - 24px);margin:0 auto 40px;background:#fff;padding:0.6in 0.65in;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--forest);padding-bottom:14px;margin-bottom:18px;gap:16px}
+header img{width:54px}
+h1{font-family:var(--serif);font-weight:400;font-size:26px;margin:0 0 4px}
+.meta{color:var(--muted);font-size:13px}
+.alert{border:2px solid var(--gold);background:#fffaf0;border-radius:6px;padding:12px 14px;margin-bottom:16px}
+.alert b{display:block;color:var(--gold-ink);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.alert p{margin:0;font-size:15px;white-space:pre-wrap}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px}
+section{break-inside:avoid;margin-bottom:12px}
+h2{font-family:var(--serif);font-weight:400;font-size:16px;color:var(--forest);border-bottom:1px solid var(--line);padding-bottom:4px;margin:10px 0 6px}
+dl{margin:0;display:grid;grid-template-columns:128px 1fr;gap:3px 10px}
+dt{font-weight:600;color:var(--muted);font-size:12.5px}
+dd{margin:0;white-space:pre-wrap}
+.full{grid-column:1/-1}
+.empty{color:var(--muted);font-style:italic}
+.err{text-align:center;padding:60px;font-size:16px}
+@media print{
+  body{background:#fff}
+  .bar{display:none}
+  .page{box-shadow:none;width:auto;margin:0;padding:0}
+  @page{size:letter;margin:0.55in}
+}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.page{padding:22px}}
+</style>
+</head>
+<body>
+<div class="bar"><button onclick="window.print()">Print or save as PDF</button></div>
+<div class="page" id="page"><p class="err">Loading…</p></div>
+<script>
+(async () => {
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const money = (n) => (Number(n) || 0).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+  const day = (iso) => iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" }) : "";
+  const id = new URLSearchParams(location.search).get("id");
+  const page = document.getElementById("page");
+  try {
+    const r = await fetch("/api/admin", { method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin", body: JSON.stringify({ action: "discGet", id }) });
+    const d = await r.json();
+    if (r.status === 401) throw new Error("Please sign in to your admin page first, then open this sheet again.");
+    if (!r.ok) throw new Error(d.error || "This record couldn't be loaded.");
+    const f = d.record.fields || {}, p = d.proposal;
+    const row = (label, v) => v && String(v).trim() ? `<dt>${esc(label)}</dt><dd>${esc(v)}</dd>` : "";
+    const block = (title, rows, cls = "") => { const inner = rows.join(""); return inner ? `<section class="${cls}"><h2>${esc(title)}</h2><dl>${inner}</dl></section>` : ""; };
+    const dates = p ? p.datesLabel : (f.startDate ? `${day(f.startDate)}${f.endDate ? " to " + day(f.endDate) : ""}` : f.datesPreferred);
+    document.title = `Hospitality sheet: ${f.name || "Retreat"}`;
+    const lodging = p && p.lodging && p.lodging.length ? p.lodging.map((l) => l.name + (l.location ? ` (${l.location})` : "")).join("\n") : f.lodging;
+    const included = p && p.included && p.included.length ? p.included.map((e) => e.name).join(", ") : "";
+    page.innerHTML = `
+      <header>
+        <div>
+          <h1>${esc(p ? p.title : (f.organization ? `The ${f.organization} Retreat` : f.name || "Retreat"))}</h1>
+          <div class="meta">${esc(dates || "Dates to be confirmed")}${f.guests ? ` &nbsp;|&nbsp; ${esc(f.guests)} guests` : ""}${f.stayType && f.stayType !== "Not sure yet" ? ` &nbsp;|&nbsp; ${esc(f.stayType)}` : ""}</div>
+          <div class="meta">Prepared ${esc(new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }))}</div>
+        </div>
+        <img src="/media/logo_header.png" alt="Peace on the Pond">
+      </header>
+      ${f.dietary ? `<div class="alert"><b>Dietary restrictions and allergies</b><p>${esc(f.dietary)}</p></div>` : ""}
+      ${f.accessibility ? `<div class="alert"><b>Accessibility needs</b><p>${esc(f.accessibility)}</p></div>` : ""}
+      <div class="grid">
+        ${block("Host", [row("Name", f.name), row("Organization", f.organization), row("Phone", f.phone), row("Email", f.email)])}
+        ${block("The retreat", [row("Type", f.retreatType), row("Dates", dates), row("Guests", f.guests), row("Celebrating", f.celebration)])}
+        ${block("Food", [row("Interests", f.foodInterests), row("Meal plans", f.meals)])}
+        ${block("Look and feel", [row("Colors", f.colors), row("Theme", f.theme)])}
+        ${block("Experiences", [row("Included", included), row("Interested in", (f.interests || []).join(", ")), row("Other ideas", f.otherIdeas)], "full")}
+        ${block("Stay", [row("Lodging", lodging)])}
+        ${block("Intention", [row("Purpose", f.purpose), row("Guests should feel", f.feel)])}
+        ${block("Agenda", [row("Schedule", f.agenda)], "full")}
+        ${block("Notes for the team", [row("Notes", f.notes), row("Also", f.anythingElse)], "full")}
+      </div>`;
+  } catch (e) {
+    page.innerHTML = `<p class="err">${esc(e.message)}</p>`;
+  }
+})();
+</script>
+</body>
+</html>

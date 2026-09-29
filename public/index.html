@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light only">
+<title>Your Retreat Proposal | Peace on the Pond</title>
+<link rel="icon" href="/media/logo_header.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nanum+Myeongjo:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<!-- ============ ACCESS GATE ============ -->
+<div id="gate" class="gate">
+  <video class="gate-video" autoplay muted loop playsinline preload="auto" poster="/media/pond-poster.jpg">
+    <source src="/media/pond.mp4" type="video/mp4">
+  </video>
+  <div class="gate-shade"></div>
+  <form id="gate-form" class="gate-card" autocomplete="off" novalidate>
+    <div class="seal">
+      <svg class="ripples" viewBox="0 0 240 240" aria-hidden="true">
+        <circle cx="120" cy="120" r="62"/><circle cx="120" cy="120" r="80"/>
+        <circle cx="120" cy="120" r="98"/><circle cx="120" cy="120" r="116"/>
+      </svg>
+      <img src="/media/logo_header.png" alt="Peace on the Pond">
+    </div>
+    <h1>Your retreat proposal</h1>
+    <p class="gate-sub">Enter the access code from your invitation to open it.</p>
+    <label for="code" class="sr-only">Access code</label>
+    <div class="code-row">
+      <input id="code" name="code" type="text" inputmode="text" autocapitalize="characters"
+             spellcheck="false" placeholder="Access code" required>
+      <button type="submit" class="btn btn-primary" id="gate-btn">Open proposal</button>
+    </div>
+    <p id="gate-error" class="gate-error" role="alert"></p>
+    <p class="gate-help">No code? Call <a href="tel:+14244821765">(424) 482-1765</a> or email
+      <a href="mailto:info@peaceonthepond.com">info@peaceonthepond.com</a>.</p>
+  </form>
+</div>
+
+<!-- ============ PROPOSAL ============ -->
+<div id="app" hidden>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="https://www.peaceonthepond.com" class="topbar-brand" target="_blank" rel="noopener">
+        <img src="/media/logo_header.png" alt="">
+        <span>Peace on the Pond</span>
+      </a>
+      <button class="cart-pill" id="cart-pill" type="button" aria-label="Go to your selections">
+        <span id="cart-pill-count">0</span> selected
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <video autoplay muted loop playsinline preload="auto" poster="/media/pond-poster.jpg">
+      <source src="/media/pond.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade"></div>
+    <svg class="hero-ripples" viewBox="0 0 400 400" aria-hidden="true">
+      <circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="100"/>
+      <circle cx="200" cy="200" r="145"/><circle cx="200" cy="200" r="195"/>
+    </svg>
+    <div class="wrap hero-inner">
+      <p class="hero-for" data-bind="preparedFor"></p>
+      <h1 data-bind="title"></h1>
+      <p class="hero-when"><span data-bind="dates"></span><span class="sep" aria-hidden="true"></span><span data-bind="duration"></span></p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#pay">Pay your part</a>
+        <a class="btn btn-ghost" href="#enhance">Explore enhancements</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="letter">
+    <div class="wrap letter-grid">
+      <div>
+        <h2 class="salutation" data-bind="salutation"></h2>
+        <div class="letter-body" id="letter-body"></div>
+        <p class="signoff">With care,<br><span>Peace on the Pond</span></p>
+      </div>
+      <dl class="facts">
+        <div><dt>Dates</dt><dd data-bind="dates"></dd></div>
+        <div><dt>Duration</dt><dd data-bind="duration"></dd></div>
+        <div><dt>Capacity</dt><dd data-bind="capacity"></dd></div>
+        <div><dt>Location</dt><dd>10 private acres, Douglasville, Georgia</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="recap" id="recap" hidden>
+    <div class="wrap">
+      <p class="kicker">From our conversation</p>
+      <h2>What we heard from you</h2>
+      <dl class="recap-list" id="recap-list"></dl>
+    </div>
+  </section>
+
+  <section class="grounds">
+    <div class="wrap">
+      <h2>The grounds are yours for the stay.</h2>
+      <p class="lede">A private pond, a labyrinth, wooded trails, a sauna and ice plunge, the Shala wellness pavilion, and suites for everyone to rest at the end of the day.</p>
+      <div class="photo-grid">
+        <figure class="p-lake"><img src="/media/lake.jpg" alt="The private pond"><figcaption>Private pond</figcaption></figure>
+        <figure class="p-laby"><img src="/media/laby.jpg" alt="The labyrinth"><figcaption>Labyrinth</figcaption></figure>
+        <figure class="p-fire"><img src="/media/firepit.jpg" alt="Fire pit seating by the pond"><figcaption>Fire pit circle</figcaption></figure>
+        <figure class="p-spa"><img src="/media/spa.jpg" alt="Spa"><figcaption>Spa</figcaption></figure>
+        <figure class="p-trail"><img src="/media/trail.jpg" alt="Wooded walking trail"><figcaption>Walking trails</figcaption></figure>
+        <figure class="p-hammock"><img src="/media/hammock.jpg" alt="Hammock lawn behind the main house"><figcaption>Hammock lawn</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="package" id="package">
+    <div class="wrap package-grid">
+      <div>
+        <p class="kicker">Your package</p>
+        <h2 data-bind="packageName"></h2>
+        <p class="lede" data-bind="packageSummary"></p>
+        <ul class="inclusions" id="inclusions"></ul>
+        <div class="included-extras">
+          <h3>Wellness enhancements already included</h3>
+          <ul id="included-extras"></ul>
+        </div>
+      </div>
+      <aside class="invest">
+        <p class="invest-label">Your investment</p>
+        <p class="invest-total" data-bind="total"></p>
+        <p class="invest-rate" data-bind="rate"></p>
+        <ol class="schedule organizer-only">
+          <li><span>Retainer</span><strong data-bind="retainer"></strong><em data-bind="retainerLabel"></em></li>
+          <li><span>Balance</span><strong data-bind="balance"></strong><em data-bind="balanceLabel"></em></li>
+        </ol>
+        <p class="split-note" data-bind="splitNote"></p>
+        <div class="tracker" id="tracker" hidden>
+          <div class="tracker-top"><span>Paid toward the retreat</span><strong id="tracker-amount"></strong></div>
+          <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="tracker-bar"><span></span></div>
+          <p class="tracker-names" id="tracker-names"></p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="lodging" id="lodging" hidden>
+    <div class="wrap">
+      <p class="kicker">Partner lodging</p>
+      <h2>Where you'll stay</h2>
+      <p class="lede" id="lodging-lede"></p>
+      <div class="lodge-list" id="lodging-list"></div>
+    </div>
+  </section>
+
+  <section class="enhance" id="enhance">
+    <div class="wrap">
+      <h2>Shape the experience</h2>
+      <p class="lede" id="enhance-lede"></p>
+      <div class="filters" id="filters" role="tablist" aria-label="Filter by intention"></div>
+      <p class="filter-blurb" id="filter-blurb"></p>
+      <div class="menu" id="menu"></div>
+    </div>
+  </section>
+
+  <section class="pairings">
+    <div class="wrap">
+      <h2>Modalities that work well together</h2>
+      <p class="lede">From our Sacred Modalities Guidebook. Each pairing is designed so one practice prepares the body for the next.</p>
+      <div class="pair-list" id="pair-list"></div>
+    </div>
+  </section>
+
+  <section class="pay" id="pay">
+    <div class="wrap pay-grid">
+      <form id="pay-form" class="pay-form" novalidate>
+        <h2>Pay your part</h2>
+        <p class="lede" id="pay-lede">Each guest can pay on their own. Share this page and the access code with your group.</p>
+
+        <div class="field-row">
+          <label>Your name<input type="text" id="payer-name" autocomplete="name" required></label>
+          <label>Email for your receipt<input type="email" id="payer-email" autocomplete="email" required></label>
+        </div>
+
+        <fieldset class="choices" id="choices">
+          <legend>What would you like to pay?</legend>
+        </fieldset>
+
+        <div class="shares" id="shares-row">
+          <span>Number of shares I'm paying for</span>
+          <div class="stepper">
+            <button type="button" data-step="-1" aria-label="Fewer shares">−</button>
+            <output id="shares">1</output>
+            <button type="button" data-step="1" aria-label="More shares">+</button>
+          </div>
+        </div>
+
+        <label class="custom-amt" id="custom-row" hidden>Amount toward the retreat
+          <span class="money-input"><span>$</span><input type="number" id="custom-amount" min="1" step="1" inputmode="decimal"></span>
+        </label>
+      </form>
+
+      <aside class="summary" aria-live="polite">
+        <h3>Your summary</h3>
+        <ul id="summary-lines" class="summary-lines"></ul>
+        <div id="summary-requests" class="summary-requests" hidden>
+          <h4>You asked about</h4>
+          <ul></ul>
+          <p>These are priced on request. We'll follow up with details.</p>
+        </div>
+        <p class="summary-total"><span>Due today</span><strong id="summary-total">$0</strong></p>
+        <button class="btn btn-primary btn-block" id="pay-btn" type="button">Continue to secure payment</button>
+        <p class="pay-error" id="pay-error" role="alert"></p>
+        <p class="fineprint" id="pay-fineprint">You'll finish on Stripe's secure checkout. Pay by card or Apple Pay, or choose Klarna, Afterpay, or Affirm to split your payment into installments where eligible.</p>
+        <a class="request-link" id="request-link" hidden>Send my questions without paying</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="terms">
+    <div class="wrap terms-grid">
+      <div>
+        <h2>Before you book</h2>
+        <ul id="terms-list"></ul>
+      </div>
+      <div class="organizer-only">
+        <h2>Next steps</h2>
+        <ol class="steps">
+          <li><strong>Confirm your date and experiences.</strong> Choose the enhancements your group would like.</li>
+          <li><strong>Receive your invoice.</strong> We'll send a detailed breakdown of your selections, group size, and pricing.</li>
+          <li><strong>Secure your retreat.</strong> Your retainer holds your dates so we can begin preparing.</li>
+          <li><strong>Final preparations.</strong> We'll check in to confirm the agenda and have everything ready.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="accept organizer-only" id="accept">
+    <div class="wrap accept-grid">
+      <div>
+        <p class="kicker">Ready to move forward?</p>
+        <h2>Accept your proposal</h2>
+        <p class="lede">Accepting lets us know you're ready and confirms you've read and agree to the terms above. Your dates are secured once the retainer is paid.</p>
+      </div>
+      <div class="accept-card" id="accept-card">
+        <form id="accept-form" novalidate>
+          <label>Type your full name<input type="text" id="accept-name" autocomplete="name"></label>
+          <label class="agree"><input type="checkbox" id="accept-agree"> I have read and agree to the terms of this proposal.</label>
+          <button class="btn btn-primary btn-block" type="submit">Accept proposal</button>
+          <p class="pay-error" id="accept-error" role="alert"></p>
+        </form>
+        <div id="accept-done" hidden>
+          <p class="accept-mark">Accepted</p>
+          <p id="accept-done-text"></p>
+          <a class="btn btn-primary" href="#pay">Continue to payment</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ask" id="ask">
+    <div class="wrap ask-grid">
+      <div>
+        <h2>Have a question?</h2>
+        <p class="lede">Ask us anything about your retreat. We'll reply by email, usually within a day.</p>
+        <div class="tour-cta organizer-only">
+          <p class="lede" style="margin-bottom:12px">Prefer to see it in person?</p>
+          <a class="btn btn-quiet-dark" id="tour-link" href="/tour/">Book a private tour</a>
+        </div>
+      </div>
+      <form id="ask-form" class="ask-form" novalidate>
+        <div class="field-row" style="margin:0">
+          <label>Your name<input type="text" id="ask-name" autocomplete="name"></label>
+          <label>Your email<input type="email" id="ask-email" autocomplete="email"></label>
+        </div>
+        <label>Your question<textarea id="ask-text" rows="4"></textarea></label>
+        <button class="btn btn-primary" type="submit">Send question</button>
+        <p class="pay-error" id="ask-error" role="alert"></p>
+        <p id="ask-done" class="ask-done" hidden>Thank you! Your question was sent. We'll be in touch soon.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <img src="/media/logo_footer.png" alt="Peace on the Pond: Retreat, Relax, Restore" class="footer-logo">
+      <p>Questions about your proposal?<br>
+        <a href="tel:+14244821765">(424) 482-1765</a><br>
+        <a href="mailto:info@peaceonthepond.com">info@peaceonthepond.com</a><br>
+        <a href="https://www.peaceonthepond.com" target="_blank" rel="noopener">peaceonthepond.com</a></p>
+    </div>
+  </footer>
+
+  <div class="dock" id="dock" hidden>
+    <span id="dock-text"></span>
+    <a class="btn btn-primary" href="#pay">Review and pay</a>
+  </div>
+  <div class="toast" id="toast" role="status" hidden></div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
