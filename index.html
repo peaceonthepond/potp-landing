@@ -129,9 +129,12 @@
     .fact:nth-child(3){ border-left:none; }
   }
 
-  section{ padding:96px 0; }
-  @media (max-width:720px){ section{ padding:60px 0; } }
-  .section-head{ margin-bottom:48px; }
+  section{ padding:64px 0; }
+  @media (max-width:720px){ section{ padding:44px 0; } }
+  /* Two sections with the same background in a row: don't double the space between them */
+  section:not(.alt):not(.cta) + section:not(.alt):not(.cta), section.alt + section.alt{ padding-top:0; }
+  .section-head{ margin-bottom:36px; }
+  .section-head:last-child{ margin-bottom:0; }
   .section-head .kicker{ font-size:13px; font-weight:600; letter-spacing:0.04em; color:var(--ink); opacity:0.7; margin-bottom:10px; display:block; }
   .section-head h2{ font-size:clamp(28px, 3.6vw, 40px); line-height:1.14; max-width:620px; }
   .section-head p.lead{ margin-top:14px; font-size:17px; opacity:0.8; max-width:560px; }
@@ -301,7 +304,7 @@
   .event .more:hover{ text-decoration:underline; }
 
   /* ---------- cta banner ---------- */
-  .cta{ position:relative; background:var(--canvas); color:var(--ink); overflow:hidden; padding:88px 0; border-top:1px solid var(--line); }
+  .cta{ position:relative; background:var(--canvas); color:var(--ink); overflow:hidden; padding:72px 0; border-top:1px solid var(--line); }
   .cta h2{ color:var(--ink); font-size:clamp(28px, 4vw, 42px); max-width:560px; }
   .cta .ripple2{ position:absolute; left:-140px; bottom:-200px; width:520px; height:520px; opacity:0.35; pointer-events:none; }
   .cta-inner{ position:relative; z-index:2; }
