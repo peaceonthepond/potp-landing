@@ -58,7 +58,9 @@ testimonials); featured ones show as "Name | Retreat | Role".
 Reset and The Offsite (day, from $3,333, up to 50 attendees) and The Executive
 Retreat (overnight, custom proposal, so there's still no public overnight
 rate), plus a priced list of added services that are never included
-automatically. Its
+automatically. Four ready-made experience packages (Rest, Restore, Connect,
+Build) match the packages on corporate proposals (`bundles` in the proposals
+site's `data/catalog.json`). Its
 buttons open `/call/?type=corporate` on the proposals site, which books a
 corporate discovery call. If you change package prices in the proposals admin
 defaults, update the prices on this page too. It's a separate page for a separate
