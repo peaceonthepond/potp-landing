@@ -12,6 +12,16 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "corporate.peaceonthepond.com"
+        }
+      ],
+      "destination": "/corporate.html"
+    },
+    {
       "source": "/corporate",
       "destination": "/corporate.html"
     }
