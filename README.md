@@ -62,5 +62,5 @@ corporate discovery call. If you change package prices in the proposals admin
 defaults, update the prices on this page too. It's a separate page for a separate
 audience: the main page doesn't link to it, and it doesn't link back. Share
 its address directly: `https://corporate.peaceonthepond.com` once that
-domain is added in Vercel (it opens this page; see `vercel.json`), or
+domain is added in Vercel (its home page redirects here; see `vercel.json`), or
 `https://<your landing site>/corporate`.

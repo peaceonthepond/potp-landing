@@ -12,6 +12,12 @@
   ],
   "rewrites": [
     {
+      "source": "/corporate",
+      "destination": "/corporate.html"
+    }
+  ],
+  "redirects": [
+    {
       "source": "/",
       "has": [
         {
@@ -19,11 +25,8 @@
           "value": "corporate.peaceonthepond.com"
         }
       ],
-      "destination": "/corporate.html"
-    },
-    {
-      "source": "/corporate",
-      "destination": "/corporate.html"
+      "destination": "/corporate",
+      "permanent": false
     }
   ]
 }
