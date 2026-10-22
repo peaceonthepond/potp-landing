@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corporate Retreats &amp; Team Offsites | Peace on the Pond</title>
+<meta name="description" content="Leadership retreats, strategy days, and team offsites at Peace on the Pond, a private 10-acre estate in Douglasville, Georgia, just outside Atlanta. One team at a time.">
+<meta property="og:title" content="Peace on the Pond: Corporate Retreats &amp; Team Offsites">
+<meta property="og:description" content="A private 10-acre estate just outside Atlanta for leadership retreats, strategy days, and team offsites.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#fcfaf0">
+<link rel="icon" type="image/png" href="media/favicon.png">
+<link rel="apple-touch-icon" href="media/logo-emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nanum+Myeongjo:wght@400;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#18181a;
+    --canvas:#fcfaf0;
+    --canvas-raise:#e5d8c6;
+    --forest:#1b5642;
+    --forest-deep:#123a2c;
+    --sage:#e5d8c6;
+    --sage-soft:#efe6d8;
+    --brass:#cca456;
+    --brass-soft:#dcc179;
+    --water:#cca456;
+    --line: rgba(20,19,16,0.14);
+    --card: #ffffff;
+    --cream:#fcfaf0;
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html{scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior:smooth;}
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:'Nanum Myeongjo', Georgia, 'Times New Roman', serif;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Libre Baskerville', Baskerville, Georgia, serif;
+    font-weight:400;
+    margin:0;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  a{ color:inherit; }
+  p{ line-height:1.6; }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:color-mix(in srgb, var(--canvas) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top, 0px);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:80px;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand img{ height:52px; width:auto; display:block; }
+  .brand span{
+    font-family:'Libre Baskerville', Baskerville, Georgia, serif;
+    font-weight:400; font-style:italic;
+    font-size:19px; color:var(--ink);
+    letter-spacing:0.01em;
+  }
+  @media (max-width:520px){ .brand span{ display:none; } }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    font-family:'Work Sans', sans-serif; font-weight:600; font-size:15px;
+    padding:13px 26px; border-radius:2px;
+    text-decoration:none; cursor:pointer;
+    border:1px solid transparent;
+    min-height:44px;
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background:var(--forest); color:var(--cream); border-color:var(--forest); }
+  .btn-primary:hover{ background:var(--forest-deep); }
+  .btn-line{ background:transparent; color:#ffffff; border-color:#ffffff; }
+  .btn-line:hover{ background:#ffffff; color:var(--forest); }
+  .btn-nav{ padding:11px 20px; font-size:14px; }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; padding:0; overflow:hidden; min-height:560px; display:flex; align-items:flex-end; }
+  .hero-media{ position:absolute; inset:0; z-index:0; }
+  .hero-media video{ width:100%; height:100%; object-fit:cover; display:block; }
+  .hero-media::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(10,10,8,0.86) 0%, rgba(10,10,8,0.58) 45%, rgba(10,10,8,0.28) 100%);
+  }
+  .hero-ripple{ position:absolute; z-index:1; top:-120px; right:-140px; width:560px; height:560px; opacity:0.35; pointer-events:none; }
+  @media (max-width:720px){ .hero-ripple{ width:400px; height:400px; top:-80px; right:-160px; opacity:0.25; } }
+  .hero-inner{ position:relative; z-index:2; max-width:660px; padding:120px 24px 64px; }
+  .tag{
+    display:inline-block; font-size:13px; font-weight:600; letter-spacing:0.04em;
+    color:var(--ink); background:var(--canvas); border:1px solid var(--line); padding:7px 14px; border-radius:2px; margin-bottom:26px;
+  }
+  .hero h1{ font-size:clamp(30px, 4.7vw, 48px); line-height:1.18; margin-bottom:22px; color:var(--canvas); }
+  .hero p.lede{ font-size:19px; line-height:1.6; color:var(--canvas); opacity:0.92; margin-bottom:34px; max-width:520px; }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+  .hero-note{ font-size:14px; opacity:0.85; margin-top:16px; color:var(--canvas); }
+
+  .fade-in{ animation:riseIn .9s cubic-bezier(.2,.7,.3,1) both; }
+  .fade-in.d1{ animation-delay:.08s; } .fade-in.d2{ animation-delay:.18s; } .fade-in.d3{ animation-delay:.28s; }
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ .fade-in{ animation:none; } }
+
+  /* ---------- fact strip ---------- */
+  .facts{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--canvas-raise); }
+  .facts .wrap{ display:grid; grid-template-columns:repeat(4, 1fr); gap:0; }
+  .fact{ padding:30px 18px; text-align:center; border-left:1px solid var(--line); }
+  .fact:first-child{ border-left:none; }
+  .fact .num{ font-family:'Libre Baskerville', Georgia, serif; font-size:28px; color:var(--forest); font-weight:400; }
+  .fact .lbl{ font-size:13px; opacity:0.72; margin-top:4px; }
+  @media (max-width:720px){
+    .facts .wrap{ grid-template-columns:repeat(2, 1fr); }
+    .fact{ padding:22px 12px; }
+    .fact:nth-child(3){ border-left:none; }
+  }
+
+  section{ padding:64px 0; }
+  @media (max-width:720px){ section{ padding:44px 0; } }
+  /* Two sections with the same background in a row: don't double the space between them */
+  section:not(.alt):not(.cta) + section:not(.alt):not(.cta), section.alt + section.alt{ padding-top:0; }
+  .section-head{ margin-bottom:36px; }
+  .section-head:last-child{ margin-bottom:0; }
+  .section-head .kicker{ font-size:13px; font-weight:600; letter-spacing:0.04em; color:var(--ink); opacity:0.7; margin-bottom:10px; display:block; }
+  .section-head h2{ font-size:clamp(28px, 3.6vw, 40px); line-height:1.14; max-width:620px; }
+  .section-head p.lead{ margin-top:14px; font-size:17px; opacity:0.8; max-width:560px; }
+  .alt{ background:var(--canvas-raise); }
+
+  /* ---------- story ---------- */
+  .story{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center; }
+  @media (max-width:840px){ .story{ grid-template-columns:1fr; gap:32px; } }
+  .story-mark{
+    font-family:'Libre Baskerville', Georgia, serif; font-style:italic; font-size:15px; color:var(--ink); opacity:0.75;
+    display:block; margin-bottom:14px;
+  }
+  .story p{ font-size:16.5px; opacity:0.86; margin:0 0 16px; }
+  .story .names{ font-family:'Libre Baskerville', Georgia, serif; font-style:italic; color:var(--ink); font-size:17px; margin-top:20px; }
+  .story-figure{
+    position:relative; overflow:hidden; border:1px solid var(--line);
+    min-height:420px; display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  .story-figure img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .story-figure::before{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(0deg, rgba(15,19,14,0.82) 0%, rgba(15,19,14,0.25) 55%, rgba(15,19,14,0.05) 85%); }
+  .story-figure .content{ position:relative; z-index:2; padding:30px; }
+  .story-figure .est{ font-size:13px; letter-spacing:0.04em; color:#fff; opacity:0.85; font-weight:600; display:block; margin-bottom:14px; }
+  .story-figure blockquote{ margin:0; font-family:'Libre Baskerville', Georgia, serif; font-style:italic; font-size:19px; color:#fff; line-height:1.4; }
+  .story-figure cite{ font-style:normal; font-size:14px; color:#fff; opacity:0.75; display:block; margin-top:12px; }
+
+  /* ---------- testimonial ---------- */
+  .testimonial{ max-width:760px; }
+  .testimonial .stars{ color:var(--forest); font-size:18px; letter-spacing:3px; margin-bottom:20px; }
+  .testimonial blockquote{ margin:0; font-family:'Libre Baskerville', Georgia, serif; font-style:italic; font-size:clamp(20px,2.6vw,26px); line-height:1.45; color:var(--ink); }
+  .testimonial cite{ display:block; margin-top:20px; font-style:normal; font-size:15px; opacity:0.7; }
+
+  /* ---------- pain points ---------- */
+  .pain-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .pain-grid .p-item{ background:var(--canvas); padding:32px; }
+  .pain-grid .p-item p{ font-size:16px; opacity:0.85; margin:0; }
+  @media (max-width:720px){ .pain-grid{ grid-template-columns:1fr; } .pain-grid .p-item{ padding:26px; } }
+
+  /* ---------- why different / split ---------- */
+  .split{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap:64px; align-items:start; }
+  @media (max-width:840px){ .split{ grid-template-columns:1fr; gap:36px; } }
+  .split p{ font-size:18px; opacity:0.85; }
+  .reasons{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  .reasons li{ display:flex; gap:16px; padding:20px 0; border-top:1px solid var(--line); }
+  .reasons li:last-child{ border-bottom:1px solid var(--line); }
+  .reasons .mark{ flex:none; width:12px; height:12px; margin-top:7px; border:1.5px solid var(--brass); border-radius:50%; }
+  .reasons .txt strong{ display:block; font-weight:600; margin-bottom:3px; }
+  .reasons .txt span{ font-size:15px; opacity:0.78; }
+
+  /* ---------- you / us split ---------- */
+  .division{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); }
+  .division .col{ padding:40px; }
+  .division .col + .col{ border-left:none; background:var(--forest); color:var(--cream); }
+  .division .col h3{ font-size:14px; letter-spacing:0.04em; font-weight:600; opacity:0.7; margin-bottom:22px; color:var(--ink); }
+  .division .col + .col h3{ opacity:0.85; color:var(--cream); }
+  .division ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .division li{ font-size:16px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+  .division .col + .col li{ border-bottom:1px solid rgba(252,250,240,0.2); }
+  .division li:last-child{ border-bottom:none; padding-bottom:0; }
+  @media (max-width:720px){ .division{ grid-template-columns:1fr; } .division .col + .col{ border-left:none; border-top:1px solid var(--line); } .division .col{ padding:28px; } }
+
+  /* ---------- grounds ---------- */
+  .grounds-grid{
+    display:grid; gap:14px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 130px) repeat(2, 150px);
+    grid-template-areas:
+      "lake lake lake lake laby laby"
+      "lake lake lake lake laby laby"
+      "lake lake lake lake spa  spa"
+      "lake lake lake lake spa  spa"
+      "green green trail trail terr terr"
+      "green green trail trail terr terr";
+  }
+  .g-card{
+    position:relative; overflow:hidden; border:1px solid var(--line);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    color:#fff;
+  }
+  .g-card.lake{ grid-area:lake; }
+  .g-card.laby{ grid-area:laby; }
+  .g-card.spa{ grid-area:spa; }
+  .g-card.green{ grid-area:green; }
+  .g-card.trail{ grid-area:trail; }
+  .g-card.terr{ grid-area:terr; }
+  .g-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transition:transform .5s ease; }
+  .g-card:hover img{ transform:scale(1.04); }
+  .g-card::after{ content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(0deg, rgba(15,19,14,0.78) 0%, rgba(15,19,14,0.15) 55%, rgba(15,19,14,0) 80%); }
+  .g-card.laby::before{
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background-image: repeating-radial-gradient(circle at 50% 42%, transparent 0px, transparent 13px, rgba(252,250,240,0.4) 14px, transparent 15px);
+  }
+  .g-card .g-text{ position:relative; z-index:2; padding:20px; }
+  .g-card h3{ font-size:19px; color:#fff; }
+  .g-card p{ font-size:14px; opacity:0.88; margin:4px 0 0; color:#fff; }
+  @media (max-width:900px){
+    .grounds-grid{
+      grid-template-columns:repeat(2, 1fr);
+      grid-template-rows: repeat(6, 190px);
+      grid-template-areas:
+        "lake lake" "laby spa" "green trail" "green terr";
+    }
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery-scroll{
+    display:flex; gap:14px; overflow-x:auto; padding-bottom:8px;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+  }
+  .gallery-scroll::-webkit-scrollbar{ height:6px; }
+  .gallery-scroll::-webkit-scrollbar-thumb{ background:var(--line); border-radius:3px; }
+  .g-photo{
+    position:relative; flex:none; width:300px; height:220px; overflow:hidden;
+    border:1px solid var(--line); scroll-snap-align:start;
+  }
+  .g-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .g-photo::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(15,19,14,0.7) 0%, rgba(15,19,14,0) 45%); }
+  .g-photo span{ position:absolute; left:16px; bottom:14px; z-index:2; color:#fff; font-size:14.5px; font-weight:600; }
+  @media (max-width:720px){ .g-photo{ width:250px; height:190px; } }
+
+  /* ---------- process ---------- */
+  .steps{ display:flex; flex-direction:column; }
+  .step{ display:grid; grid-template-columns:64px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--line); }
+  .step:last-child{ border-bottom:1px solid var(--line); }
+  .step .idx{ font-family:'Libre Baskerville', Georgia, serif; font-size:28px; color:var(--brass); font-style:italic; }
+  .step h3{ font-size:21px; margin-bottom:8px; }
+  .step p{ opacity:0.8; font-size:15.5px; max-width:560px; }
+
+  /* ---------- pricing ---------- */
+  .price-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:28px; }
+  @media (max-width:720px){ .price-grid{ grid-template-columns:1fr; } }
+  .price-card{ background:var(--card); border:1px solid var(--line); padding:36px; }
+  .price-card .label{ font-size:14px; opacity:0.7; margin-bottom:10px; }
+  .price-card .amount{ font-family:'Libre Baskerville', Georgia, serif; font-size:40px; color:var(--forest); font-weight:400; }
+  .price-card .amount sup{ font-size:16px; font-weight:600; opacity:0.7; margin-right:4px; top:-14px; position:relative; }
+  .price-card .per{ font-size:14px; opacity:0.65; margin-top:4px; }
+  .disclaimer{ font-size:14px; opacity:0.68; max-width:640px; border-left:2px solid var(--forest); padding-left:16px; }
+
+  /* ---------- reserve ---------- */
+  .reserve{ display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  @media (max-width:780px){ .reserve{ grid-template-columns:1fr; } }
+  .reserve .r-card{ border:1px solid var(--line); padding:30px; background:var(--card); }
+  .reserve .r-card h3{ font-size:19px; margin-bottom:10px; }
+  .reserve .r-card p{ font-size:15px; opacity:0.8; }
+
+  /* ---------- built for (tags) ---------- */
+  .tags{ display:flex; flex-wrap:wrap; gap:12px; }
+  .tags span{ border:1px solid var(--line); background:var(--card); padding:11px 18px; font-size:14.5px; border-radius:2px; }
+
+  /* ---------- FAQ ---------- */
+  .faq{ display:flex; flex-direction:column; }
+  .faq details{ border-top:1px solid var(--line); padding:22px 0; }
+  .faq details:last-child{ border-bottom:1px solid var(--line); }
+  .faq summary{ cursor:pointer; font-family:'Libre Baskerville', Georgia, serif; font-size:19px; color:var(--ink); list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary .icon{ font-size:22px; color:var(--forest); flex:none; transition:transform .2s ease; }
+  .faq details[open] summary .icon{ transform:rotate(45deg); }
+  .faq .a{ margin-top:14px; font-size:15.5px; opacity:0.82; max-width:640px; }
+
+  /* ---------- upcoming ---------- */
+  .events{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  @media (max-width:840px){ .events{ grid-template-columns:1fr; } }
+  .event{ border:1px solid var(--line); background:var(--card); padding:26px; display:flex; flex-direction:column; gap:14px; min-height:170px; }
+  .event .date{ font-size:13px; letter-spacing:0.03em; color:var(--ink); opacity:0.65; font-weight:600; }
+  .event h3{ font-size:19px; line-height:1.3; }
+  .event .desc{ margin:0; font-size:15px; line-height:1.55; opacity:.85; }
+  .event .more{ margin-top:auto; font-size:14px; font-weight:600; color:var(--forest); text-decoration:none; }
+  .event .more:hover{ text-decoration:underline; }
+
+  /* ---------- cta banner ---------- */
+  .cta{ position:relative; background:var(--canvas); color:var(--ink); overflow:hidden; padding:72px 0; border-top:1px solid var(--line); }
+  .cta h2{ color:var(--ink); font-size:clamp(28px, 4vw, 42px); max-width:560px; }
+  .cta .ripple2{ position:absolute; left:-140px; bottom:-200px; width:520px; height:520px; opacity:0.35; pointer-events:none; }
+  .cta-inner{ position:relative; z-index:2; }
+  .cta p{ opacity:0.75; max-width:480px; margin:16px 0 30px; font-size:17px; }
+  .cta .btn-primary{ background:var(--forest); color:var(--canvas); border-color:var(--forest); }
+  .cta .btn-primary:hover{ background:var(--forest-deep); }
+  .cta .phone{ margin-top:18px; font-size:15px; opacity:0.75; }
+  .cta .phone a{ text-decoration:underline; }
+
+  /* ---------- footer ---------- */
+  footer{ padding:64px 0 calc(40px + env(safe-area-inset-bottom, 0px)); border-top:1px solid var(--line); }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+  @media (max-width:720px){ .foot-grid{ grid-template-columns:1fr; gap:28px; } }
+  .foot-grid h4{ font-size:13px; letter-spacing:0.04em; opacity:0.6; margin-bottom:14px; font-weight:600; }
+  .foot-grid ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .foot-grid a{ text-decoration:none; font-size:14.5px; opacity:0.85; }
+  .foot-grid a:hover{ opacity:1; text-decoration:underline; }
+  .foot-brand{ display:flex; align-items:center; gap:12px; }
+  .foot-brand img{ height:46px; width:auto; }
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; border-top:1px solid var(--line); padding-top:24px; font-size:13px; opacity:0.6; }
+  .social{ display:flex; gap:14px; }
+  .social a{ opacity:0.75; }
+  .social a:hover{ opacity:1; }
+
+  /* Labels, buttons, and small details stay sans, matching the proposals */
+  .tag, .section-head .kicker, .fact .lbl, .story-figure .est, .division .col h3,
+  .g-photo span, .event .date, .event .more, .foot-grid h4, .hero-note, .btn, button,
+  .price-card .amount sup, .stars, cite { font-family:'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+  /* Call + pre-booking quick actions */
+  .nav-actions{ display:flex; gap:10px; align-items:center; }
+  .btn-quiet{ background:transparent; color:var(--forest); border-color:var(--forest); }
+  .btn-quiet:hover{ background:var(--forest); color:var(--cream); }
+  .action-bar{ display:none; }
+  @media (max-width:720px){
+    .nav-actions .btn-quiet{ display:none; }
+    .action-bar{
+      display:grid; grid-template-columns:1fr 1.4fr; gap:10px;
+      position:fixed; left:0; right:0; bottom:0; z-index:50;
+      padding:10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+      background:var(--canvas); border-top:1px solid var(--line); box-shadow:0 -6px 20px rgba(0,0,0,.08);
+    }
+    .action-bar .btn{ justify-content:center; text-align:center; padding:14px 10px; }
+    body{ padding-bottom:78px; }
+  }
+  .exp-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; }
+  .exp{ background:var(--card); border:1px solid var(--line); border-top:3px solid var(--brass); padding:30px 26px; }
+  .exp-k{ display:block; font-family:'Libre Baskerville', Georgia, serif; font-size:24px; color:var(--forest); margin-bottom:14px; }
+  .exp p{ font-size:15.5px; line-height:1.9; margin:0; opacity:0.85; }
+  .exp-close{ font-family:'Libre Baskerville', Georgia, serif; font-style:italic; font-size:19px; margin:30px 0 0; color:var(--forest); }
+  @media (max-width: 900px){ .exp-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width: 520px){ .exp-grid{ grid-template-columns:1fr; } }
+  .cta-buttons{ display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-bottom:18px; }
+
+  /* ---------- corporate packages ---------- */
+  .pkg-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:20px; }
+  @media (max-width:900px){ .pkg-grid{ grid-template-columns:1fr; } }
+  .pkg{ background:var(--card); border:1px solid var(--line); padding:32px 28px; display:flex; flex-direction:column; }
+  .pkg.feature{ border-top:3px solid var(--brass); }
+  .pkg .label{ font-size:13px; font-weight:600; letter-spacing:0.04em; opacity:0.7; margin-bottom:10px; }
+  .pkg h3{ font-size:23px; line-height:1.25; margin-bottom:6px; }
+  .pkg .for{ font-size:15px; opacity:0.75; margin:0 0 18px; }
+  .pkg .per{ font-size:14px; opacity:0.65; }
+  .pkg .amount{ font-family:'Libre Baskerville', Georgia, serif; font-size:34px; color:var(--forest); margin:2px 0 4px; }
+  .pkg ul{ list-style:none; margin:18px 0 0; padding:18px 0 0; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:10px; }
+  .pkg li{ font-size:15px; line-height:1.5; padding-left:22px; position:relative; opacity:0.88; }
+  .pkg li::before{ content:""; position:absolute; left:0; top:7px; width:9px; height:9px; border:1.5px solid var(--brass); border-radius:50%; }
+  .pkg .btn{ margin-top:auto; }
+  .pkg .cta-gap{ height:24px; }
+  .addons{ display:grid; grid-template-columns:repeat(2, 1fr); gap:0 40px; margin-top:34px; }
+  @media (max-width:720px){ .addons{ grid-template-columns:1fr; } }
+  .addons div{ display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line); font-size:15.5px; }
+  .addons div span:last-child{ font-family:'Work Sans', sans-serif; font-weight:600; font-size:14.5px; color:var(--forest); white-space:nowrap; }
+  /* ---------- sample day ---------- */
+  .agenda{ display:flex; flex-direction:column; max-width:760px; }
+  .agenda .row{ display:grid; grid-template-columns:110px 1fr; gap:24px; padding:18px 0; border-top:1px solid var(--line); }
+  .agenda .row:last-child{ border-bottom:1px solid var(--line); }
+  .agenda .t{ font-family:'Libre Baskerville', Georgia, serif; font-style:italic; color:var(--brass); font-size:18px; }
+  .agenda strong{ display:block; font-weight:600; margin-bottom:2px; }
+  .agenda span{ font-size:15px; opacity:0.78; }
+  @media (max-width:520px){ .agenda .row{ grid-template-columns:80px 1fr; gap:14px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="https://www.peaceonthepond.com">
+      <img src="media/logo-emblem.png" alt="Peace on the Pond">
+      <span>Peace on the Pond</span>
+    </a>
+    <div class="nav-actions">
+      <a class="btn btn-quiet btn-nav" data-phone href="tel:+14244821765" aria-label="Call Peace on the Pond">Call</a>
+      <a class="btn btn-primary btn-nav" data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Plan a Team Offsite</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-media">
+    <video autoplay muted loop playsinline preload="auto" poster="media/pond-poster.jpg">
+      <source src="media/pond.mp4" type="video/mp4">
+    </video>
+  </div>
+  <svg class="hero-ripple" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="260" cy="180" r="30" fill="none" stroke="var(--cream)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="70" fill="none" stroke="var(--cream)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="115" fill="none" stroke="var(--brass)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="165" fill="none" stroke="var(--brass)" stroke-width="1"/>
+    <circle cx="260" cy="180" r="200" fill="none" stroke="var(--cream)" stroke-width="1"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <span class="tag fade-in">Corporate Retreats &amp; Team Offsites</span>
+    <h1 class="fade-in d1">Take your team somewhere they can actually think.</h1>
+    <p class="lede fade-in d2">A private 10-acre estate just outside Atlanta for leadership retreats, strategy days, and team offsites. Reserved for one team at a time, with the space, food, and hosting handled so your people can focus on each other and the work.</p>
+    <div class="hero-ctas fade-in d3">
+      <a class="btn btn-primary" data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Plan a Team Offsite</a>
+      <a class="btn btn-line" href="#packages">See Packages</a>
+      <a class="btn btn-line" data-tour href="https://potp-proposals.vercel.app/tour/">Schedule a Private Tour</a>
+    </div>
+    <p class="hero-note fade-in d3">Douglasville, Georgia &middot; Close to Atlanta. A world away.</p>
+  </div>
+</section>
+
+<div class="facts">
+  <div class="wrap">
+    <div class="fact"><div class="num">10</div><div class="lbl">private acres</div></div>
+    <div class="fact"><div class="num">Up to 30</div><div class="lbl">attendees for a day</div></div>
+    <div class="fact"><div class="num">12</div><div class="lbl">overnight guests</div></div>
+    <div class="fact"><div class="num">1</div><div class="lbl">team at a time</div></div>
+  </div>
+</div>
+
+<section id="pain">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The offsite problem</span>
+      <h2>Most offsites feel a lot like the office.</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="p-item"><p>The same windowless conference room, the same screens, the same patterns, just a different address.</p></div>
+      <div class="p-item"><p>Laptops stay open, notifications keep coming, and attention splits between the room and the inbox.</p></div>
+      <div class="p-item"><p>The agenda is packed wall to wall, leaving no room for the thinking and conversations you came for.</p></div>
+      <div class="p-item"><p>Your team heads home with a page of notes, but nothing has really shifted in how they work together.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap split">
+    <div>
+      <div class="section-head">
+        <span class="kicker">Why Peace on the Pond</span>
+        <h2>Room to focus. Room to breathe.</h2>
+      </div>
+      <p>Peace on the Pond gives your team a private setting that moves easily between working sessions and real restoration. Strategy in the greenhouse, a walk on the trails between sessions, lunch on the terrace, and a fireside close by the water.</p>
+    </div>
+    <ul class="reasons">
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Only your team</strong><span>The whole estate is reserved for your group. No other meetings, no hotel lobby, no distractions.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Spaces for working and gathering</strong><span>The greenhouse, covered pavilion, and Serenity Terrace for sessions and breakouts, indoors and out.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Wellness built into the day</strong><span>Sound and breathwork, the labyrinth, walking trails, infrared sauna, and jacuzzi to reset between sessions.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>Facilitation when you want it</strong><span>Vision casting, team values alignment, and leadership reflection, shaped around your goals. Or bring your own facilitator.</span></div></li>
+      <li><span class="mark" aria-hidden="true"></span><div class="txt"><strong>One point of contact</strong><span>A dedicated host on the day, and one person coordinating catering, setup, and timing as your offsite comes together.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="alt" id="packages">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Corporate packages</span>
+      <h2>Three ways to bring your team.</h2>
+      <p class="lead">Every package includes exclusive use of the estate, a dedicated host, and catering. We'll shape the details around your goals on our call.</p>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg">
+        <div class="label">Day &middot; Up to 20 attendees</div>
+        <h3>The Reset</h3>
+        <p class="for">A restorative team day to reconnect, recharge, and come back clear.</p>
+        <div class="per">Starting at</div>
+        <div class="amount">$4,500</div>
+        <ul>
+          <li>Exclusive use for up to 8 hours</li>
+          <li>Catered breakfast and lunch, with coffee and light bites all day</li>
+          <li>A sound and breathwork session and a guided labyrinth reflection</li>
+          <li>Working-session setup and a dedicated on-site host</li>
+          <li>Room for up to 30 attendees</li>
+        </ul>
+        <div class="cta-gap"></div>
+        <a class="btn btn-quiet" data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Ask about The Reset</a>
+      </div>
+      <div class="pkg feature">
+        <div class="label">Day &middot; Up to 20 attendees</div>
+        <h3>The Offsite</h3>
+        <p class="for">A facilitated leadership and strategy day built around your goals.</p>
+        <div class="per">Starting at</div>
+        <div class="amount">$6,500</div>
+        <ul>
+          <li>Everything in The Reset</li>
+          <li>A facilitated leadership workshop, such as vision casting or team values alignment</li>
+          <li>A closing fireside with charcuterie</li>
+          <li>Two hours of event photography</li>
+          <li>A run-of-show prepared before the day</li>
+        </ul>
+        <div class="cta-gap"></div>
+        <a class="btn btn-primary" data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Plan The Offsite</a>
+      </div>
+      <div class="pkg">
+        <div class="label">Overnight &middot; Up to 12 guests</div>
+        <h3>The Executive Retreat</h3>
+        <p class="for">Two or more nights for leadership teams who need real time together.</p>
+        <div class="per">Pricing</div>
+        <div class="amount">Custom Proposal</div>
+        <ul>
+          <li>Exclusive use and overnight stays in our five Gemstone Suites</li>
+          <li>Breakfast daily, with catered lunch and dinner each full day</li>
+          <li>Two facilitated leadership sessions</li>
+          <li>Wellness experiences, sauna, and jacuzzi between sessions</li>
+          <li>A dedicated host each day and a fireside close</li>
+        </ul>
+        <div class="cta-gap"></div>
+        <a class="btn btn-quiet" data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Ask about the Executive Retreat</a>
+      </div>
+    </div>
+    <div class="addons">
+      <div><span>Additional attendees (day packages)</span><span>$95 each</span></div>
+      <div><span>Additional facilitated workshop</span><span>$950</span></div>
+      <div><span>Event photography</span><span>$175 / hour</span></div>
+      <div><span>Additional on-site staff</span><span>$375 / day</span></div>
+      <div><span>Chair or table massage</span><span>$65 / person</span></div>
+      <div><span>Private chef or hibachi dinner, transportation</span><span>Quoted for your group</span></div>
+    </div>
+    <p class="disclaimer" style="margin-top:28px">Final pricing depends on your date, group size, length of stay, menu, and the experiences you choose. Your proposal will show every line before anything is booked.</p>
+  </div>
+</section>
+
+<section id="day">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">A sample day</span>
+      <h2>What a day at Peace on the Pond can look like.</h2>
+      <p class="lead">Every agenda is built with you. Here's one way an Offsite day might flow.</p>
+    </div>
+    <div class="agenda">
+      <div class="row"><div class="t">9:00</div><div><strong>Arrive and settle in</strong><span>Breakfast, coffee, and a walk to the water before the first session.</span></div></div>
+      <div class="row"><div class="t">9:45</div><div><strong>Opening session</strong><span>Set the intention for the day in the greenhouse.</span></div></div>
+      <div class="row"><div class="t">10:30</div><div><strong>Working session</strong><span>Your agenda, with breakout spaces indoors and out.</span></div></div>
+      <div class="row"><div class="t">12:30</div><div><strong>Lunch on the terrace</strong><span>A catered lunch, planned around your team's dietary needs.</span></div></div>
+      <div class="row"><div class="t">1:30</div><div><strong>Facilitated workshop</strong><span>Vision casting or team values alignment, shaped around your goals.</span></div></div>
+      <div class="row"><div class="t">3:15</div><div><strong>Reset</strong><span>A sound and breathwork session, or a guided walk through the labyrinth.</span></div></div>
+      <div class="row"><div class="t">4:15</div><div><strong>Fireside close</strong><span>Commitments, reflections, and charcuterie by the fire before heading home.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="grounds">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">The estate</span>
+      <h2>Ten acres for working sessions, breaks, and everything in between.</h2>
+    </div>
+    <div class="grounds-grid">
+      <div class="g-card lake">
+        <img loading="lazy" decoding="async" src="media/grounds-lake.jpg" alt="Private lake at Peace on the Pond">
+        <div class="g-text"><h3>Private Lake</h3><p>A calm centerpiece for walking one-on-ones, quiet reflection, and a moment to exhale between sessions.</p></div>
+      </div>
+      <div class="g-card laby">
+        <img loading="lazy" decoding="async" src="media/grounds-labyrinth.jpg" alt="Labyrinth at Peace on the Pond">
+        <div class="g-text"><h3>Labyrinth</h3><p>A walking reflection that helps a team slow down and think clearly.</p></div>
+      </div>
+      <div class="g-card spa">
+        <img loading="lazy" decoding="async" src="media/grounds-spa.jpg" alt="Spa and hot tub at Peace on the Pond">
+        <div class="g-text"><h3>Spa</h3><p>Infrared sauna and jacuzzi to recover at the end of a full day.</p></div>
+      </div>
+      <div class="g-card green">
+        <img loading="lazy" decoding="async" src="media/grounds-greenhouse.jpg" alt="Greenhouse at Peace on the Pond">
+        <div class="g-text"><h3>Greenhouse</h3><p>A light-filled room for workshops, strategy sessions, and creative work.</p></div>
+      </div>
+      <div class="g-card trail">
+        <img loading="lazy" decoding="async" src="media/grounds-trail.jpg" alt="Walking trail at Peace on the Pond">
+        <div class="g-text"><h3>Walking Trails</h3><p>Wooded paths for a break, a walking meeting, or fresh air.</p></div>
+      </div>
+      <div class="g-card terr">
+        <img loading="lazy" decoding="async" src="media/grounds-terrace.jpg" alt="Serenity Terrace deck at Peace on the Pond">
+        <div class="g-text"><h3>Serenity Terrace</h3><p>An elevated outdoor space for breakouts and shared meals.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>From first call to fireside close.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="idx">01</div><div><h3>Book a call</h3><p>Tell us about your team, your goals, group size, and the dates you're considering.</p></div></div>
+      <div class="step"><div class="idx">02</div><div><h3>Get your proposal</h3><p>We'll send a proposal with your package, agenda ideas, and every line of pricing, ready to share with whoever approves it.</p></div></div>
+      <div class="step"><div class="idx">03</div><div><h3>Reserve your date</h3><p>A retainer holds your date. Pay online, or ask for an invoice for your accounts payable team.</p></div></div>
+      <div class="step"><div class="idx">04</div><div><h3>Bring your team</h3><p>Your host has the space set, the coffee on, and the day timed so your team can focus on the work.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="for">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Who gathers here</span>
+      <h2>Built for teams doing important work together.</h2>
+    </div>
+    <div class="tags">
+      <span>Leadership &amp; Executive Retreats</span>
+      <span>Strategy &amp; Planning Days</span>
+      <span>Team Building &amp; Connection</span>
+      <span>Burnout Recovery &amp; Wellness Days</span>
+      <span>Board &amp; Founder Retreats</span>
+      <span>New Team Kickoffs</span>
+      <span>Client &amp; Partner Gatherings</span>
+      <span>Recognition &amp; Celebration</span>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Good to know</span>
+      <h2>Questions teams ask us.</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>What does a corporate offsite cost?<span class="icon">+</span></summary>
+        <p class="a">Day packages start at $4,500 for The Reset and $6,500 for The Offsite, each for up to 20 attendees. Overnight Executive Retreats are custom quoted based on your group size, length of stay, menu, and sessions. Your proposal shows every line before anything is booked.</p>
+      </details>
+      <details>
+        <summary>How many people can we bring?<span class="icon">+</span></summary>
+        <p class="a">Day packages are designed for up to 20 attendees, with room for up to 30. Overnight retreats host up to 12 guests in our five Gemstone Suites. We'll confirm the best setup for your group on our call.</p>
+      </details>
+      <details>
+        <summary>Can we bring our own facilitator or speaker?<span class="icon">+</span></summary>
+        <p class="a">Yes. Bring the facilitators and speakers you trust, add one of our facilitated workshops, or combine both. The agenda is yours.</p>
+      </details>
+      <details>
+        <summary>What about food and dietary needs?<span class="icon">+</span></summary>
+        <p class="a">Catering is included in every package and planned around your team's dietary needs and allergies. Private chef and hibachi dinners can be added.</p>
+      </details>
+      <details>
+        <summary>Can we pay by invoice?<span class="icon">+</span></summary>
+        <p class="a">Yes. You can pay online, or ask for an invoice for your accounts payable team. Let us know about any vendor setup you need, such as a W-9 or a purchase order number, and we'll work through it with you.</p>
+      </details>
+      <details>
+        <summary>How far is it from Atlanta?<span class="icon">+</span></summary>
+        <p class="a">Peace on the Pond is in Douglasville, Georgia, west of Atlanta and within convenient reach of Hartsfield&#8211;Jackson Atlanta International Airport. Travel time varies with traffic and time of day.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <svg class="ripple2" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="180" cy="200" r="40" fill="none" stroke="var(--forest)" stroke-width="1" opacity="0.5"/>
+    <circle cx="180" cy="200" r="90" fill="none" stroke="var(--forest)" stroke-width="1" opacity="0.4"/>
+    <circle cx="180" cy="200" r="150" fill="none" stroke="var(--forest)" stroke-width="1" opacity="0.3"/>
+  </svg>
+  <div class="wrap cta-inner">
+    <h2>Give your team a day that actually changes something.</h2>
+    <p>Tell us about your team and what you want to walk away with. We'll talk through dates, group size, and the right package, then send a proposal you can share.</p>
+    <div class="cta-buttons">
+      <a class="btn btn-primary" data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Plan a Team Offsite</a>
+      <a class="btn btn-quiet" data-tour href="https://potp-proposals.vercel.app/tour/">Schedule a Private Tour</a>
+    </div>
+    <p class="phone">Prefer to talk? Call <a data-phone data-phone-text href="tel:+14244821765">(424) 482-1765</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="foot-brand" href="https://www.peaceonthepond.com">
+          <img loading="lazy" decoding="async" src="media/logo-wordmark.png" alt="Peace on the Pond">
+        </a>
+        <p style="margin-top:14px; font-size:14.5px; opacity:0.75; max-width:280px;">A private 10-acre estate in Douglasville, Georgia, for leadership retreats, strategy days, and team offsites.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="https://www.peaceonthepond.com">Home</a></li>
+          <li><a data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Plan a Team Offsite</a></li>
+          <li><a href="./">Retreats at Peace on the Pond</a></li>
+          <li><a data-tour href="https://potp-proposals.vercel.app/tour/">Schedule a Private Tour</a></li>
+          <li><a href="https://www.peaceonthepond.com/our-story">Our Story</a></li>
+          <li><a href="https://www.peaceonthepond.com/retreat-space">The Sanctuary / Space &amp; Amenities</a></li>
+          <li><a href="#packages">Corporate Packages</a></li>
+          <li><a data-courses href="https://potp-proposals.vercel.app/courses/">Courses</a></li>
+          <li><a data-shop href="https://potp-proposals.vercel.app/shop/">Shop</a></li>
+          <li><a href="https://www.peaceonthepond.com/contact-us">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a data-phone data-phone-text href="tel:+14244821765">(424) 482-1765</a></li>
+        </ul>
+        <div class="social" style="margin-top:14px;">
+          <a href="https://www.instagram.com/_peaceonthepond_" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558843480266" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h-2a2 2 0 0 0-2 2v3H9v3h2v6h3v-6h2.2l.8-3H14v-2a1 1 0 0 1 1-1h2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Peace on the Pond. All rights reserved.</span>
+      <span>Douglasville, Georgia</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Booking links and the phone number come from your proposals site, like the main landing page.
+   If your proposals site has a different address, change the line below (keep the quotes). */
+const PROPOSALS_SITE = "https://potp-proposals.vercel.app";
+const base = PROPOSALS_SITE.replace(/\/$/, "");
+document.querySelectorAll("[data-tour]").forEach((a) => (a.href = base + "/tour/"));
+document.querySelectorAll("[data-courses]").forEach((a) => (a.href = base + "/courses/"));
+document.querySelectorAll("[data-shop]").forEach((a) => (a.href = base + "/shop/"));
+// Corporate inquiries book a corporate discovery call.
+document.querySelectorAll("[data-call-corp]").forEach((a) => (a.href = base + "/call/?type=corporate"));
+fetch(base + "/api/events").then((r) => r.json()).then((d) => {
+  const phone = d && d.settings && d.settings.phone;
+  if (!phone) return;
+  const digits = phone.replace(/\D/g, "");
+  const tel = "tel:+" + (digits.length === 10 ? "1" + digits : digits);
+  document.querySelectorAll("[data-phone]").forEach((a) => (a.href = tel));
+  document.querySelectorAll("[data-phone-text]").forEach((a) => (a.textContent = phone));
+}).catch(() => {});
+</script>
+<div class="action-bar" role="navigation" aria-label="Quick actions">
+  <a class="btn btn-quiet" data-phone href="tel:+14244821765">Call now</a>
+  <a class="btn btn-primary" data-call-corp href="https://potp-proposals.vercel.app/call/?type=corporate">Plan a Team Offsite</a>
+</div>
+</body>
+</html>

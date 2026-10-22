@@ -3,6 +3,7 @@
 The public landing page for Instagram and QR codes. Plain HTML, no setup needed.
 
 - `index.html` is the page
+- `corporate.html` is the corporate retreats and team offsites page, at `/corporate`
 - `media/` holds the video, photos, and logos
 
 ## Put it on Vercel
@@ -50,3 +51,13 @@ overnight retreats by custom proposal (no public overnight rate), no exact
 airport drive times. The testimonial section shows the placeholder quote only
 until a testimonial is featured in the admin page (Operations > Feedback and
 testimonials); featured ones show as "Name | Retreat | Role".
+
+## Corporate page
+
+`corporate.html` (at `/corporate`) presents the three corporate packages: The
+Reset ($4,500 day), The Offsite ($6,500 day), and The Executive Retreat
+(overnight, custom proposal, so there's still no public overnight rate). Its
+buttons open `/call/?type=corporate` on the proposals site, which books a
+corporate discovery call. If you change package prices in the proposals admin
+defaults, update the prices on this page too. The main page links to it from
+"Who gathers here" and the footer.
