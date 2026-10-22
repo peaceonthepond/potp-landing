@@ -55,7 +55,7 @@ testimonials); featured ones show as "Name | Retreat | Role".
 ## Corporate page
 
 `corporate.html` (at `/corporate`) presents the three corporate packages: The
-Reset and The Offsite (day, from $2,088, up to 30 attendees) and The Executive
+Reset and The Offsite (day, from $3,333, up to 50 attendees) and The Executive
 Retreat (overnight, custom proposal, so there's still no public overnight
 rate), plus a priced list of added services that are never included
 automatically. Its
