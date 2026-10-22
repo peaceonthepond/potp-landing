@@ -46,7 +46,7 @@ hidden when none are published.
 
 Page copy follows the Landing Page Master Copy & Implementation Guide:
 primary button "Start Your Retreat Inquiry", secondary "Schedule a Private
-Tour", capacity 25-30 day / 10-12 overnight, day retreats from $1,888,
+Tour", capacity up to 30 day / up to 10 overnight, day retreats from $1,888,
 overnight retreats by custom proposal (no public overnight rate), no exact
 airport drive times. The testimonial section shows the placeholder quote only
 until a testimonial is featured in the admin page (Operations > Feedback and
