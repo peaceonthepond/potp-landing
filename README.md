@@ -59,5 +59,7 @@ Reset ($4,500 day), The Offsite ($6,500 day), and The Executive Retreat
 (overnight, custom proposal, so there's still no public overnight rate). Its
 buttons open `/call/?type=corporate` on the proposals site, which books a
 corporate discovery call. If you change package prices in the proposals admin
-defaults, update the prices on this page too. The main page links to it from
-"Who gathers here" and the footer.
+defaults, update the prices on this page too. It's a separate page for a separate
+audience: the main page doesn't link to it, and it doesn't link back. Share
+its address directly (for example
+`https://<your landing site>/corporate`).
