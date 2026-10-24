@@ -358,6 +358,15 @@
   @media (max-width: 900px){ .exp-grid{ grid-template-columns:repeat(2, 1fr); } }
   @media (max-width: 520px){ .exp-grid{ grid-template-columns:1fr; } }
   .cta-buttons{ display:flex; flex-wrap:wrap; gap:12px; justify-content:flex-start; margin-bottom:18px; }
+  .news{ background:var(--forest); color:var(--cream); padding:46px 0; }
+  .news .wrap{ display:grid; grid-template-columns:1fr 1.1fr; gap:28px; align-items:center; }
+  .news h2{ color:var(--cream); font-size:clamp(24px,3vw,32px); margin:0 0 6px; }
+  .news p{ margin:0; opacity:.85; }
+  .news form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .news input{ flex:1 1 180px; min-width:0; font:400 16px 'Work Sans', sans-serif; padding:13px 14px; border-radius:6px; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.96); color:#111; }
+  .news button{ flex:0 0 auto; font:600 15px 'Work Sans', sans-serif; padding:13px 22px; border-radius:6px; border:0; background:var(--brass); color:#123a2c; cursor:pointer; }
+  .news .msg{ flex-basis:100%; font-size:14px; min-height:1.2em; }
+  @media (max-width:760px){ .news .wrap{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -740,6 +749,18 @@
   </div>
 </section>
 
+<section class="news" id="newsletter">
+  <div class="wrap">
+    <div><h2>Stay close to the Pond</h2><p>One thoughtful email a month: dates on the calendar, new offerings, and a little encouragement to make room for yourself.</p></div>
+    <form id="news-form" data-list="general">
+      <input name="name" placeholder="Your name" autocomplete="name" aria-label="Your name">
+      <input name="email" type="email" placeholder="Email" autocomplete="email" required aria-label="Email">
+      <button type="submit">Subscribe</button>
+      <p class="msg" role="status"></p>
+    </form>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -792,6 +813,20 @@
    (keep the quotes). Example: "https://proposals.peaceonthepond.com"
    ====================================================================== */
 const PROPOSALS_SITE = "https://potp-proposals.vercel.app";
+// Newsletter sign-up: goes to the newsletter list on the proposals site.
+document.getElementById("news-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = e.target, msg = f.querySelector(".msg"), btn = f.querySelector("button");
+  btn.disabled = true; msg.textContent = "";
+  try {
+    const r = await fetch(PROPOSALS_SITE.replace(/\/$/, "") + "/api/newsletter", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "subscribe", name: f.name.value, email: f.email.value, list: f.dataset.list, source: "Landing page" }) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(d.error || "Something went wrong. Please try again.");
+    f.innerHTML = `<p class="msg">${d.message || "Thank you, you're on the list."}</p>`;
+  } catch (x) { msg.textContent = x.message; btn.disabled = false; }
+});
+
 
 // Tour buttons point to the tour page on your proposals site.
 document.querySelectorAll("[data-tour]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/tour/"));

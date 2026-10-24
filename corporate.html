@@ -389,6 +389,15 @@
   .agenda strong{ display:block; font-weight:600; margin-bottom:2px; }
   .agenda span{ font-size:15px; opacity:0.78; }
   @media (max-width:520px){ .agenda .row{ grid-template-columns:80px 1fr; gap:14px; } }
+  .news{ background:var(--forest); color:var(--cream); padding:46px 0; }
+  .news .wrap{ display:grid; grid-template-columns:1fr 1.1fr; gap:28px; align-items:center; }
+  .news h2{ color:var(--cream); font-size:clamp(24px,3vw,32px); margin:0 0 6px; }
+  .news p{ margin:0; opacity:.85; }
+  .news form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .news input{ flex:1 1 180px; min-width:0; font:400 16px 'Work Sans', sans-serif; padding:13px 14px; border-radius:6px; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.96); color:#111; }
+  .news button{ flex:0 0 auto; font:600 15px 'Work Sans', sans-serif; padding:13px 22px; border-radius:6px; border:0; background:var(--brass); color:#123a2c; cursor:pointer; }
+  .news .msg{ flex-basis:100%; font-size:14px; min-height:1.2em; }
+  @media (max-width:760px){ .news .wrap{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -709,6 +718,18 @@
   </div>
 </section>
 
+<section class="news" id="newsletter">
+  <div class="wrap">
+    <div><h2>Ideas for your next team day</h2><p>A short monthly note for leaders: team experiences, open dates, and what's working for teams at the Pond.</p></div>
+    <form id="news-form" data-list="corporate">
+      <input name="name" placeholder="Your name" autocomplete="name" aria-label="Your name">
+      <input name="email" type="email" placeholder="Email" autocomplete="email" required aria-label="Email">
+      <button type="submit">Subscribe</button>
+      <p class="msg" role="status"></p>
+    </form>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -758,6 +779,20 @@
 /* Booking links and the phone number come from your proposals site, like the main landing page.
    If your proposals site has a different address, change the line below (keep the quotes). */
 const PROPOSALS_SITE = "https://potp-proposals.vercel.app";
+// Newsletter sign-up: goes to the newsletter list on the proposals site.
+document.getElementById("news-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = e.target, msg = f.querySelector(".msg"), btn = f.querySelector("button");
+  btn.disabled = true; msg.textContent = "";
+  try {
+    const r = await fetch(PROPOSALS_SITE.replace(/\/$/, "") + "/api/newsletter", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "subscribe", name: f.name.value, email: f.email.value, list: f.dataset.list, source: "Landing page" }) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(d.error || "Something went wrong. Please try again.");
+    f.innerHTML = `<p class="msg">${d.message || "Thank you, you're on the list."}</p>`;
+  } catch (x) { msg.textContent = x.message; btn.disabled = false; }
+});
+
 const base = PROPOSALS_SITE.replace(/\/$/, "");
 document.querySelectorAll("[data-tour]").forEach((a) => (a.href = base + "/tour/"));
 document.querySelectorAll("[data-courses]").forEach((a) => (a.href = base + "/courses/"));

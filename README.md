@@ -42,6 +42,10 @@ Footer links go to the courses page and shop on the proposals site. The
 "Learn with us" section lists published courses automatically and stays
 hidden when none are published.
 
+## Newsletter sign-up
+
+A "Stay close to the Pond" sign-up band sits above the footer on the landing page (General list) and the corporate page (Corporate list, "Ideas for your next team day"). Sign-ups go to Admin > Newsletters on the proposals site through `PROPOSALS_SITE`.
+
 ## Membership
 
 The "Join the Collective" section (above the FAQ) links to the membership page on the proposals site (`/membership/`) and to the member portal login (`/member/`). Both use `PROPOSALS_SITE`.
