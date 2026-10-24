@@ -643,6 +643,19 @@
   </div>
 </section>
 
+<section class="alt" id="collective">
+  <div class="wrap split">
+    <div>
+      <span class="kicker">Membership</span>
+      <h2>The Executive Wellness &amp; Workforce Collective</h2>
+    </div>
+    <div>
+      <p>A membership for owners and executives who carry a lot: a monthly CEO Restoration Circle, reserved sanctuary time on the property, a private peer community, and member pricing on appreciation days and wellness experiences for your team.</p>
+      <p style="margin-top:22px"><a class="btn btn-primary" data-membership href="https://potp-proposals.vercel.app/membership/">Join the Collective</a> <a class="btn btn-quiet" data-member-login href="https://potp-proposals.vercel.app/member/" style="margin-left:8px">Member login</a></p>
+    </div>
+  </div>
+</section>
+
 <section id="faq">
   <div class="wrap">
     <div class="section-head">
@@ -785,6 +798,8 @@ document.querySelectorAll("[data-tour]").forEach((a) => (a.href = PROPOSALS_SITE
 // Courses and shop live on the proposals site too.
 document.querySelectorAll("[data-courses]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/courses/"));
 document.querySelectorAll("[data-shop]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/shop/"));
+document.querySelectorAll("[data-membership]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/membership/"));
+document.querySelectorAll("[data-member-login]").forEach((a) => (a.href = PROPOSALS_SITE.replace(/\/$/, "") + "/member/"));
 // Published courses appear in "Learn with us" (the section stays hidden until there is one).
 fetch(PROPOSALS_SITE.replace(/\/$/, "") + "/api/courses").then((r) => r.json()).then((d) => {
   const list = (d && d.courses) || [];
